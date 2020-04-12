@@ -1,0 +1,8 @@
+{ 
+    "conv_2d_large_stream_norm_nobias_pool":{ "inputs":["input"],"outputs":["output"]},
+    "conv_2d_large_stream_norm_nobias":{ "inputs":["input"],"outputs":["output"]},
+    "one_conv_2d_large_stream_norm_nobias_addrelu":{ "inputs":["conv_in","add_in"],"outputs":["output"]},
+    "two_conv_2d_large_stream_norm_nobias_addrelu":{ "inputs":["conv_1_in", "conv_2_in"],"outputs":["output"]},
+    "split_one_conv_2d_large_stream_norm_nobias":{ "inputs":["input"],"outputs":["conv_out","split_out"]},
+    "split_two_conv_2d_large_stream_norm_nobias":{ "inputs":["input"],"outputs":["conv_1_out", "conv_2_out"]}
+}
