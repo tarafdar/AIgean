@@ -15,7 +15,7 @@ global_kernels = []
 kern_num = 0
 
 node_num = 0
-
+debug = 1 
 
 def add_ip(ip, node):
     print(ip)
@@ -34,11 +34,12 @@ def create_node(layers, node):
         
         
     input_bridge_ip = {
-                "inst": node['ips'][0]['inst'] + "_input_bridge", 
+                "inst": node['ips'][0]['inst'] + "_input_bridge",
                 "inputs": [{"name":"bridge_in"}], 
-                "wire_master" : ["iReset_out"],
+                "wire_master" : [{"name":"iReset_out_V", "scope":"local"}],
                 "const" : [],
-                "outputs": []
+                "outputs": [],
+                "bridge":1
             }
 
 
@@ -47,14 +48,14 @@ def create_node(layers, node):
     if len(node['ips'][0]['inputs']) == 1:
         input_bridge_name = "hls4ml_galapagos_input_bridge_one_in"
         width = node['ips'][0]['inputs'][0]['width']
-        input_bridge_ip["const"].append({"name":"width","val":width, "width":8})
+        input_bridge_ip["const"].append({"name":"width_V","val":width, "width":8})
         input_bridge_ip["outputs"].append({"name":"input", "width":width, "output_inst":node['ips'][0]["inst"], "output_port":node['ips'][0]["inputs"][0]["name"], "global":0})
     #two inputs
     else:
         input_bridge_name ="hls4ml_galapagos_input_bridge_two_in"
         for in_id, _input in enumerate(node['ips'][0]['inputs']):
             width = node['ips'][0]['inputs'][in_id]['width']
-            input_bridge_ip["const"].append({"name":"width","val":width, "width":8})
+            input_bridge_ip["const"].append({"name":"width_V","val":width, "width":8})
             input_bridge_ip["outputs"].append({"name":"input_" + str(in_id) , "width":width, "output_inst":node['ips'][0]["inst"], "output_port":node['ips'][0]["inputs"][in_id]["name"], "global":0})
 
     input_bridge_ip["kernel"] = input_bridge_name
@@ -72,8 +73,12 @@ def create_node(layers, node):
             ip['outputs'][_id]['global'] = 1 
             ip['outputs'][_id]['local_node'] = 0 
             ip['outputs'][_id]['local_port'] = 0
-        ip["wire_slave"] = {"name":"iReset", "master":{"node":kern_num, "port":"iReset_out"}}
+        ip["wire_slave"] = {"name":"iReset", "master":{"node":kern_num, "port":"iReset_out_V"}, "scope":"local"}
         add_ip(ip, node_num)
+
+    #connect input bridge to first kernel placed
+    for in_id, _input in enumerate(kerns[kern_num+1]['inputs']):
+        kerns[kern_num+1]['inputs'][in_id]['master'] = {'node':kern_num, 'port':"input_" + str(in_id)}
     
     #tags input and output ports if its global or local
     for kern_id in range(kern_num, len(kerns)):
@@ -85,8 +90,9 @@ def create_node(layers, node):
                         #same node, local connection
                         if(kerns_to_node_map[kerns_rev[m_axis['output_inst']]] == kerns_to_node_map[kern_id]):
                             kerns[kerns_rev[m_axis['output_inst']]]['inputs'][s_axis_id]['global'] = 0
-                            kerns[kerns_rev[m_axis['output_inst']]]['inputs'][s_axis_id]['local_node'] = kern_id
-                            kerns[kerns_rev[m_axis['output_inst']]]['inputs'][s_axis_id]['local_port'] = m_axis_id
+                            kerns[kerns_rev[m_axis['output_inst']]]['inputs'][s_axis_id]['master'] = {'node':kern_id, 'port':m_axis['name']}
+#                            kerns[kerns_rev[m_axis['output_inst']]]['inputs'][s_axis_id]['local_node'] = kern_id
+#                            kerns[kerns_rev[m_axis['output_inst']]]['inputs'][s_axis_id]['local_port'] = m_axis_id
                             kerns[kern_id]['outputs'][m_axis_id]['local_node'] = kerns_rev[m_axis['output_inst']] 
                             kerns[kern_id]['outputs'][m_axis_id]['local_port'] = s_axis_id
                             kerns[kern_id]['outputs'][m_axis_id]['global'] = 0
@@ -108,7 +114,9 @@ def connect_nodes(layers):
         output_bridge_ip = {
                             "inst": kern["inst"] + '_output_bridge', 
                             "kernel": "hls4ml_galapagos_output_bridge", 
-                            "inputs": [{"name":"output"}] 
+                            "outputs": [{"name":"bridge_output", "global":1, "bridge":1}],
+                            "bridge":1
+
                 }
 
 
@@ -121,18 +129,24 @@ def connect_nodes(layers):
                 print("output is " + str(output))
                 if 'output_inst' in output:
                     dest = kerns_rev[output['output_inst']]
+                    output_bridge_ip['outputs'][0]['dest'] = dest
                     output_bridge_ip['inst'] = kern["inst"] + '_output_bridge_' + output['output_inst']  + '_' + str(dest)
-                    output_bridge_ip["const"] = [{"name":"dest","val":dest, "width":8}],
-                    output_bridge_ip["outputs"] = [{"name":"output", "width":output['width'], "dest":dest, "global":1, "bridge":1}]
+                    output_bridge_ip["const"] = [{"name":"dest_V","val":dest, "width":16}, {"name":"width_V", "val":output['width'], "width":8}]
+                    output_bridge_ip["inputs"] = [{"name":"output", "width":output['width']}]
+                    output_bridge_ip['inputs'][0]['global'] = 0
+                    output_bridge_ip['inputs'][0]['master'] = {'node':kern_id, 'port':output['name']}
                     kerns[kern_id]['outputs'][output_id]['output_inst'] = kern["inst"] + '_bridge'
                     kerns[kern_id]['outputs'][output_id]['global'] = 0
                     kerns[kern_id]['outputs'][output_id]['output_port'] = 'output'
                     found = 1
                 elif 'dest' in output:
                     dest = output['dest']
+                    output_bridge_ip['outputs'][0]['dest'] = dest
                     output_bridge_ip['inst'] = kern["inst"] + '_output_bridge_dir_' + str(dest)
-                    output_bridge_ip["const"] = [{"name":"dest","val":dest, "width":8}],
-                    output_bridge_ip["outputs"] = [{"name":"output", "width":output['width'], "dest":dest, "global":1, "bridge":1}]
+                    output_bridge_ip["const"] = [{"name":"dest_V","val":dest, "width":16}, {"name":"width_V", "val":output['width'], "width":8}]
+                    output_bridge_ip["inputs"] = [{"name":"output", "width":output['width']}]
+                    output_bridge_ip['inputs'][0]['global'] = 0
+                    output_bridge_ip['inputs'][0]['master'] = {'node':kern_id, 'port':output['name']}
                     kerns[kern_id]['outputs'][output_id]['output_inst'] = kern["inst"] + '_bridge'
                     kerns[kern_id]['outputs'][output_id]['global'] = 0
                     kerns[kern_id]['outputs'][output_id]['output_port'] = 'output'
@@ -151,13 +165,15 @@ def connect_nodes(layers):
 
 def create_map_file(map_file_name):
 
-    map_element = {"board": "sidewinder", "comm":"udp", "type":"hw"}
     for idx, node in enumerate(node_to_kern_map):
+        map_element = {"board": "sidewinder", "comm":"udp", "type":"hw"}
         map_element["mac"] = metadata[idx]["mac"]
         map_element["ip"] = metadata[idx]["ip"]
         map_element["kernel"] = node
         map_dict.append(map_element)
-    r = json.dumps(map_dict, indent=4, separators=(',', ': '), sort_keys=True)
+    
+    cluster_dict = {'cluster':{'node':map_dict}} 
+    r = json.dumps(cluster_dict, indent=4, separators=(',', ': '), sort_keys=True)
     f = open(map_file_name, "w")
     f.write(str(r))
 
@@ -165,29 +181,52 @@ def create_logical_file(layers, logical_file_name):
 
 
     for kern_id, kern in enumerate(kerns):
-        kern_elem = {"clk":"ap_clk", "aresetn":"ap_rst_n"}
-        
-        kern_elem["#text"] = kern['inst'] + '_' + kern['kernel']
+        kern_elem = {"clk":"ap_clk", "aresetn":"ap_rst_n", "vendor":"xilinx.com","lib":"hls"}
+        if 'bridge' not in kern: 
+            kern_elem["#text"] = kern['inst'] + '_' + kern['kernel']
+        else:
+            kern_elem["#text"] = kern['kernel']
+
+        kern_elem["s_axis"] = []
         for s_axis in kern['inputs']:
-            kern_elem["s_axis"] = []
-            if 'width' in s_axis: 
-                for i in range(s_axis['width']):
+            if 'width' in s_axis:
+                if debug:
+                    loop_bound = 1
+                else:
+                    loop_bound = s_axis['width']
+
+                for i in range(loop_bound):
                     if s_axis['global']:
                         kern_elem["s_axis"].append({"name":(s_axis["name"]+"_" + str(i)+ "_V_V"), "scope":"global"})
                     else:
-                        master_port = str(kerns[s_axis['local_node']]['outputs'][s_axis['local_port']]['name'])+ "_" +str(i) + "_V_V"
-                        kern_elem["s_axis"].append({"name":(s_axis["name"]+"_" + str(i)+ "_V_V"), "scope":"local", "master": {"node": s_axis['local_node'], "port": master_port}})
+                        #master_port = str(kerns[s_axis['local_node']]['outputs'][s_axis['local_port']]['name'])+ "_" +str(i) + "_V_V"
+                        print(kern)
+                        print(s_axis)
+                        master_port = str(s_axis['master']['port'])+ "_" +str(i) + "_V_V"
+                        kern_elem["s_axis"].append({"name":(s_axis["name"]+"_" + str(i)+ "_V_V"), "scope":"local", "master": {"node": s_axis['master']['node'], "port": master_port}})
             else:
                 kern_elem["s_axis"].append({"name":(s_axis["name"]), "scope":"global"})
 
         kern_elem["m_axis"] = []
         for m_axis in kern['outputs']:
 
-            for i in range(m_axis['width']):
-                if m_axis['global']:
-                    kern_elem["m_axis"].append({"name":(m_axis["name"]+"_" + str(i)+ "_V_V"), "scope":"global"})
+            if 'width' in m_axis: 
+                if debug:
+                    loop_bound = 1
                 else:
-                    kern_elem["m_axis"].append({"name":(m_axis["name"]+"_" + str(i)+ "_V_V"), "scope":"local"})
+                    loop_bound = m_axis['width']
+
+                for i in range(loop_bound):
+                    if m_axis['global']:
+                        kern_elem["m_axis"].append({"name":(m_axis["name"]+"_" + str(i)+ "_V_V"), "scope":"global"})
+                    else:
+                        kern_elem["m_axis"].append({"name":(m_axis["name"]+"_" + str(i)+ "_V_V"), "scope":"local"})
+            else:
+                if m_axis['global']:
+                    kern_elem["m_axis"].append({"name":m_axis["name"], "scope":"global"})
+                else:
+                    kern_elem["m_axis"].append({"name":m_axis["name"], "scope":"local"})
+
         if( "const" in kern):
             kern_elem["const"] = kern["const"]
         
@@ -196,12 +235,13 @@ def create_logical_file(layers, logical_file_name):
 
         if ("wire_slave" in kern):
             kern_elem["wire_slave"] = kern["wire_slave"]
-        kern_elem["node"] = kerns_to_node_map[kern_id]
         kern_elem["num"] = kern_id
+        kern_elem["rep"] = 1
         kern_dict.append(kern_elem)
     
+    cluster_dict = {'cluster':{'kernel':kern_dict}} 
     #r = json.dumps(kern_dict)
-    r = json.dumps(kern_dict, indent=4, separators=(',', ': '), sort_keys=True)
+    r = json.dumps(cluster_dict, indent=4, separators=(',', ': '), sort_keys=True)
     f = open(logical_file_name, "w")
     f.write(str(r))
 
