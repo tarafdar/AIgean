@@ -287,7 +287,7 @@
                 "inst": "layer145", 
                 "kernel": "conv_2d_large_stream_norm_nobias", 
                 "inputs": [{"name":"input", "width":1024}], 
-                "outputs": [{"name":"output", "width":512, "output_inst":"layer148", "output_port":"conv_in"}]
+                "outputs": [{"name":"output", "width":512, "output_inst":"layer148", "output_port":"input"}]
             },
             {
                 "inst": "layer148", 
@@ -340,7 +340,7 @@
                 "inst": "layer170", 
                 "kernel": "one_conv_2d_large_stream_norm_nobias_addrelu", 
                 "inputs": [{"name":"conv_in", "width":512}, {"name":"add_in", "width":2048}], 
-                "outputs": [{"name":"output", "width":2048, "output_inst":"layer142", "output_port":"input"}]
+                "outputs": [{"name":"output", "width":2048, "output_inst":"layer174", "output_port":"input"}]
             },
             {
                 "inst": "layer174", 
