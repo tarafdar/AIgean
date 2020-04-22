@@ -24,7 +24,7 @@ def add_ip(ip, node):
     node_to_kern_map[node].append(len(kerns))
     kerns.append(ip)
 
-def create_node(layers, node):
+def create_node(node):
 
     global kern_num
     global node_num
@@ -39,9 +39,12 @@ def create_node(layers, node):
                 "wire_master" : [{"name":"iReset_out_V", "scope":"local"}],
                 #"const" : [],
                 "outputs": [],
-                "bridge":1
+                "bridge":"input"
             }
-
+    output_bridge_ip = {
+                "outputs": [{"name":"bridge_output", "global":1, "bridge":1}],
+                "bridge":"output"
+    }
 
 
     #check first ip in each node to see type of input bridge
@@ -84,7 +87,8 @@ def create_node(layers, node):
     for kern_id in range(kern_num, len(kerns)):
         for m_axis_id, m_axis in enumerate(kerns[kern_id]['outputs']):
             #if there is a output defined and if on same node, will be already defined if on same node
-            if (('dest' not in m_axis) and (m_axis['output_inst'] in kerns_rev)):
+            found = 0
+            if (('dest' not in m_axis) and ('output_inst' in m_axis) and (m_axis['output_inst'] in kerns_rev)):
                 for s_axis_id, s_axis in enumerate(kerns[kerns_rev[m_axis['output_inst']]]['inputs']):
                     if(s_axis['name'] == m_axis['output_port']):
                         #same node, local connection
@@ -95,9 +99,21 @@ def create_node(layers, node):
                             kerns[kern_id]['outputs'][m_axis_id]['local_node'] = kerns_rev[m_axis['output_inst']]
                             kerns[kern_id]['outputs'][m_axis_id]['local_port'] = s_axis_id
                             kerns[kern_id]['outputs'][m_axis_id]['global'] = 0
-                        else:
-                            print("failing m_axis is:" + str(m_axis))
+                            found = 1
                         break
+            if not found and 'bridge' not in kerns[kern_id]:
+                kerns[kern_id]['outputs'][m_axis_id]['slave'] = {'node':len(kerns), 'port':"output"}
+                kerns[kern_id]['outputs'][m_axis_id]['global'] = 0
+                output_bridge_ip["kernel"] = "hls4ml_galapagos_output_bridge_" + str(m_axis['width'])
+                output_bridge_ip["inst"] = kerns[kern_id]["inst"] + '_output_bridge'
+                output_bridge_ip["inputs"] = [{"name":"output", "width":m_axis['width'], "master":{"node": kern_id, "port":m_axis['name']}, "global":0}]
+                if 'output_inst' in m_axis:
+                    output_bridge_ip['output_inst'] = m_axis['output_inst']
+                else: #dest
+                    output_bridge_ip['dest'] = m_axis['dest']
+
+                add_ip(output_bridge_ip, node_num)
+
             print("m_axis is:" + str(m_axis))
 
 
@@ -106,65 +122,75 @@ def create_node(layers, node):
     node_num = node_num + 1
 
 def connect_nodes():
-    output_bridges = []
-
 
     for kern_id, kern in enumerate(kerns):
-        output_bridge_ip = {
-                            "inst": kern["inst"] + '_output_bridge',
-                            "outputs": [{"name":"bridge_output", "global":1, "bridge":1}],
-                            "bridge":1
+        if 'bridge' in kern and kern['bridge'] == "output":
+            if 'dest' not in kern:
+                dest = kerns_rev[kern['output_inst']] - 1
+            else:
+                dest = kern['dest']
 
-                }
+            kerns[kern_id]["const"] = [{"name":"dest_V","val":dest, "width":16}]
 
-
-
-        found = 0
-        #print(kern)
-        for output_id, output in enumerate(kern['outputs']):
-            # this output exists on another node
-            if output['global'] == 1 and 'bridge' not in output:
-                print("output is " + str(output))
-                if 'output_inst' in output:
-                    dest = kerns_rev[output['output_inst']] - 1
-                    output_bridge_ip['outputs'][0]['dest'] = dest
-                    output_bridge_ip['inst'] = kern["inst"] + '_output_bridge_' + output['output_inst']  + '_' + str(dest)
-                    #output_bridge_ip["const"] = [{"name":"dest_V","val":dest, "width":16}, {"name":"width_V", "val":output['width'], "width":16}]
-                    output_bridge_ip["const"] = [{"name":"dest_V","val":dest, "width":16}]
-                    output_bridge_ip["inputs"] = [{"name":"output", "width":output['width']}]
-                    output_bridge_ip['inputs'][0]['global'] = 0
-                    output_bridge_ip['inputs'][0]['master'] = {'node':kern_id, 'port':output['name']}
-                    output_bridge_ip["kernel"] = "hls4ml_galapagos_output_bridge_" + str(output['width'])
-                    kerns[kern_id]['outputs'][output_id]['output_inst'] = kern["inst"] + '_bridge'
-                    kerns[kern_id]['outputs'][output_id]['global'] = 0
-                    kerns[kern_id]['outputs'][output_id]['output_port'] = 'output'
-                    kerns[kern_id]['outputs'][output_id]['slave'] = {"node":(len(kerns)), "port":"output"}
-                    found = 1
-                elif 'dest' in output:
-                    dest = output['dest']
-                    output_bridge_ip['outputs'][0]['dest'] = dest
-                    output_bridge_ip['inst'] = kern["inst"] + '_output_bridge_dir_' + str(dest)
-                    #output_bridge_ip["const"] = [{"name":"dest_V","val":dest, "width":16}, {"name":"width_V", "val":output['width'], "width":16}]
-                    output_bridge_ip["const"] = [{"name":"dest_V","val":dest, "width":16}]
-                    output_bridge_ip["inputs"] = [{"name":"output", "width":output['width']}]
-                    output_bridge_ip['inputs'][0]['global'] = 0
-                    output_bridge_ip['inputs'][0]['master'] = {'node':kern_id, 'port':output['name']}
-                    output_bridge_ip["kernel"] = "hls4ml_galapagos_output_bridge_" + str(output['width'])
-                    kerns[kern_id]['outputs'][output_id]['output_inst'] = kern["inst"] + '_bridge'
-                    kerns[kern_id]['outputs'][output_id]['global'] = 0
-                    kerns[kern_id]['outputs'][output_id]['output_port'] = 'output'
-                    kerns[kern_id]['outputs'][output_id].pop('dest')
-                    kerns[kern_id]['outputs'][output_id]['slave'] = {"node":(len(kerns)), "port":"output"}
-                    found = 1
-                if found:
-                    break
-
-
-        if found:
-            output_bridges.append([output_bridge_ip, kerns_to_node_map[kern_id]])
-
-    for bridge in output_bridges:
-       add_ip(bridge[0], bridge[1])
+#def connect_nodes():
+#    output_bridges = []
+#
+#
+#    for kern_id, kern in enumerate(kerns):
+#        output_bridge_ip = {
+#                            "inst": kern["inst"] + '_output_bridge',
+#                            "outputs": [{"name":"bridge_output", "global":1, "bridge":1}],
+#                            "bridge":1
+#
+#                }
+#
+#
+#
+#        found = 0
+#        #print(kern)
+#        for output_id, output in enumerate(kern['outputs']):
+#            # this output exists on another node
+#            if output['global'] == 1 and 'bridge' not in output:
+#                print("output is " + str(output))
+#                if 'output_inst' in output:
+#                    dest = kerns_rev[output['output_inst']] - 1
+#                    kerns[output['master']]['outputs'][0]['dest'] = dest
+#                    kerns[output['master']]['inst'] = kern["inst"] + '_output_bridge_' + output['output_inst']  + '_' + str(dest)
+#                    kerns[output['master']]["const"] = [{"name":"dest_V","val":dest, "width":16}]
+#                    kerns[output['master']]["inputs"] = [{"name":"output", "width":output['width']}]
+#                    kerns[output['master']]['inputs'][0]['global'] = 0
+#                    kerns[output['master']]['inputs'][0]['master'] = {'node':kern_id, 'port':output['name']}
+#                    kerns[output['master']]["kernel"] = "hls4ml_galapagos_output_bridge_" + str(output['width'])
+#                    kerns[kern_id]['outputs'][output_id]['output_inst'] = kern["inst"] + '_bridge'
+#                    kerns[kern_id]['outputs'][output_id]['global'] = 0
+#                    kerns[kern_id]['outputs'][output_id]['output_port'] = 'output'
+#                    kerns[kern_id]['outputs'][output_id]['slave'] = {"node":(len(kerns)), "port":"output"}
+#                    found = 1
+#                elif 'dest' in output:
+#                    dest = output['dest']
+#                    kerns[output['master']]['outputs'][0]['dest'] = dest
+#                    kerns[output['master']]['inst'] = kern["inst"] + '_output_bridge_dir_' + str(dest)
+#                    kerns[output['master']]["const"] = [{"name":"dest_V","val":dest, "width":16}]
+#                    kerns[output['master']]["inputs"] = [{"name":"output", "width":output['width']}]
+#                    kerns[output['master']]['inputs'][0]['global'] = 0
+#                    kerns[output['master']]['inputs'][0]['master'] = {'node':kern_id, 'port':output['name']}
+#                    kerns[output['master']]["kernel"] = "hls4ml_galapagos_output_bridge_" + str(output['width'])
+#                    kerns[kern_id]['outputs'][output_id]['output_inst'] = kern["inst"] + '_bridge'
+#                    kerns[kern_id]['outputs'][output_id]['global'] = 0
+#                    kerns[kern_id]['outputs'][output_id]['output_port'] = 'output'
+#                    kerns[kern_id]['outputs'][output_id].pop('dest')
+#                    kerns[kern_id]['outputs'][output_id]['slave'] = {"node":(len(kerns)), "port":"output"}
+#                    found = 1
+#                #if found:
+#                #    add_ip(output_bridge_ip, kerns_to_node_map[kern_id])
+#                #    break
+#
+#
+#        #if found:
+#        #    output_bridges.append([output_bridge_ip, kerns_to_node_map[kern_id]])
+#
+#        #for bridge in output_bridges:
+#        #    add_ip(bridge[0], bridge[1])
 
 
 def create_map_file(map_file_name):
@@ -273,6 +299,7 @@ def create_hierarchy(file_name):
 
     connect_nodes()
 
+    local_kerns = kerns
     create_map_file("examples/resnet50/map_aegean.json")
     create_logical_file("examples/resnet50/logical_aegean.json",)
 
