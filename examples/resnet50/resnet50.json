@@ -1,0 +1,354 @@
+[
+    {
+        "metadata":{"mac":"fa:16:3e:55:ca:02", "ip":"10.1.3.212"},
+        "ips":[
+            {
+                "inst": "layer2",
+                "kernel": "conv_2d_large_stream_norm_nobias_pool",
+                "inputs": [{"name":"input", "width":3}], 
+                "outputs": [{"name":"output","width":64, "output_inst":"layer6", "output_port":"input"}]
+            },
+            {
+                "inst": "layer6", 
+                "kernel": "split_one_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":64}], 
+                "outputs": [{"name":"split_out", "width":64, "output_inst":"layer14", "output_port":"conv_in"}, {"name":"conv_out","width":64, "output_inst":"layer9", "output_port":"input"}]
+            },
+            {
+                "inst": "layer9",
+                "kernel": "conv_2d_large_stream_norm_nobias",
+                "inputs": [{"name":"input", "width":64}], 
+                "outputs": [{"name":"output","width":64, "output_inst":"layer12", "output_port":"input"}]
+            },
+            {
+                "inst": "layer12",
+                "kernel": "conv_2d_large_stream_norm_nobias",
+                "inputs": [{"name":"input", "width":64}], 
+                "outputs": [{"name":"output","width":256, "output_inst":"layer14", "output_port":"add_in"}]
+            },
+            {
+                "inst": "layer14",
+                "kernel": "one_conv_2d_large_stream_norm_nobias_addrelu",
+                "inputs": [{"name":"conv_in", "width":64}, {"name":"add_in", "width":256}], 
+                "outputs": [{"name":"output","width":256, "output_inst":"layer18", "output_port":"input"}]
+            },
+            {
+                "inst": "layer18", 
+                "kernel": "split_one_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":256}], 
+                "outputs": [{"name":"split_out", "width":256, "output_inst":"layer24", "output_port":"add_in"}, {"name":"conv_out","width":64, "output_inst":"layer21", "output_port":"input"}]
+            },
+            {
+                "inst": "layer21", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":64}], 
+                "outputs": [{"name":"output", "width":64, "output_inst":"layer24", "output_port":"conv_in"}]
+            },
+            {
+                "inst": "layer24", 
+                "kernel": "one_conv_2d_large_stream_norm_nobias_addrelu", 
+                "inputs": [{"name":"conv_in", "width":64}, {"name":"add_in", "width":256}], 
+                "outputs": [{"name":"output", "width":256, "output_inst":"layer28", "output_port":"input"}]
+            },
+            {
+                "inst": "layer28", 
+                "kernel": "split_one_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":256}], 
+                "outputs": [{"name":"split_out", "width":256, "output_inst":"layer34", "output_port":"add_in"}, {"name":"conv_out","width":64, "output_inst":"layer31", "output_port":"input"}]
+            },
+            {
+                "inst": "layer31", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":64}], 
+                "outputs": [{"name":"output", "width":64, "output_inst":"layer34", "output_port":"conv_in"}]
+            },
+            {
+                "inst": "layer34", 
+                "kernel": "one_conv_2d_large_stream_norm_nobias_addrelu", 
+                "inputs": [{"name":"conv_in", "width":64}, {"name":"add_in", "width":256}], 
+                "outputs": [{"name":"output", "width":256, "output_inst":"layer38", "output_port":"input"}]
+            },
+            {
+                "inst": "layer38", 
+                "kernel": "split_one_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":256}], 
+                "outputs": [{"name":"split_out", "width":256, "output_inst":"layer46", "output_port":"conv_in"}, {"name":"conv_out","width":128, "output_inst":"layer41", "output_port":"input"}]
+            },
+            {
+                "inst": "layer41", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":128}], 
+                "outputs": [{"name":"output", "width":128, "output_inst":"layer44", "output_port":"input"}]
+            },
+            {
+                "inst": "layer44", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":128}], 
+                "outputs": [{"name":"output", "width":512, "output_inst":"layer46", "output_port":"add_in"}]
+            },
+            {
+                "inst": "layer46", 
+                "kernel": "one_conv_2d_large_stream_norm_resnet_addrelu", 
+                "inputs": [{"name":"conv_in", "width":256}, {"name":"add_in", "width":512}], 
+                "outputs": [{"name":"output", "width":512, "output_inst":"layer50", "output_port":"input"}]
+            },
+            {
+                "inst": "layer50", 
+                "kernel": "split_one_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":512}], 
+                "outputs": [{"name":"split_out", "width":512, "output_inst":"layer56", "output_port":"add_in"}, {"name":"conv_out","width":128, "output_inst":"layer53", "output_port":"input"}]
+            },
+            {
+                "inst": "layer53", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":128}], 
+                "outputs": [{"name":"output", "width":128, "output_inst":"layer56", "output_port":"conv_in"}]
+            },
+            {
+                "inst": "layer56", 
+                "kernel": "one_conv_2d_large_stream_norm_nobias_addrelu", 
+                "inputs": [{"name":"conv_in", "width":128}, {"name":"add_in", "width":512}], 
+                "outputs": [{"name":"output", "width":512, "output_inst":"layer60", "output_port":"input"}]
+            }
+
+        ]
+    },
+    {
+        "metadata":{"mac":"fa:16:3e:55:ca:03", "ip":"10.1.3.213"},
+        "ips":[
+            {
+                "inst": "layer60", 
+                "kernel": "split_one_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":512}], 
+                "outputs": [{"name":"split_out", "width":512, "output_inst":"layer66", "output_port":"add_in"}, {"name":"conv_out","width":128, "output_inst":"layer63", "output_port":"input"}]
+            },
+            {
+                "inst": "layer63", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":128}], 
+                "outputs": [{"name":"output", "width":128, "output_inst":"layer66", "output_port":"conv_in"}]
+            },
+            {
+                "inst": "layer66", 
+                "kernel": "one_conv_2d_large_stream_norm_nobias_addrelu", 
+                "inputs": [{"name":"conv_in", "width":128}, {"name":"add_in", "width":512}], 
+                "outputs": [{"name":"output", "width":512, "output_inst":"layer70", "output_port":"input"}]
+            },
+            {
+                "inst": "layer70", 
+                "kernel": "split_one_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":512}], 
+                "outputs": [{"name":"split_out", "width":512, "output_inst":"layer76", "output_port":"add_in"}, {"name":"conv_out","width":128, "output_inst":"layer73", "output_port":"input"}]
+            },
+            {
+                "inst": "layer73", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":128}], 
+                "outputs": [{"name":"output", "width":128, "output_inst":"layer76", "output_port":"conv_in"}]
+            },
+            {
+                "inst": "layer76", 
+                "kernel": "one_conv_2d_large_stream_norm_nobias_addrelu", 
+                "inputs": [{"name":"conv_in", "width":128}, {"name":"add_in", "width":512}], 
+                "outputs": [{"name":"output", "width":512, "output_inst":"layer76_2", "output_port":"input"}]
+            },
+            {
+                "inst": "layer76_2", 
+                "kernel": "split_layer", 
+                "inputs": [{"name":"input", "width":512}], 
+                "outputs": [{"name":"output_1", "width":512, "output_inst":"layer80", "output_port":"input"}, {"name":"output_2","width":512, "output_inst":"layer88", "output_port":"conv_in"}]
+            },
+            {
+                "inst": "layer80", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":512}], 
+                "outputs": [{"name":"output", "width":256, "output_inst":"layer83", "output_port":"input"}]
+            },
+            {
+                "inst": "layer83", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":256}], 
+                "outputs": [{"name":"output", "width":256, "output_inst":"layer86", "output_port":"input"}]
+            },
+            {
+                "inst": "layer86", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":256}], 
+                "outputs": [{"name":"output", "width":1024, "output_inst":"layer86", "output_port":"input"}]
+            },
+            {
+                "inst": "layer88", 
+                "kernel": "one_conv_2d_large_stream_norm_resnet_addrelu", 
+                "inputs": [{"name":"conv_in", "width":512}, {"name":"add_in", "width":1024}], 
+                "outputs": [{"name":"output", "width":1024, "output_inst":"layer92", "output_port":"input"}]
+            },
+            {
+                "inst": "layer92", 
+                "kernel": "split_one_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":1024}], 
+                "outputs": [{"name":"split_out", "width":1024, "output_inst":"layer98", "output_port":"add_in"}, {"name":"conv_out","width":1024, "output_inst":"layer95", "output_port":"input"}]
+            },
+            {
+                "inst": "layer95", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":1024}], 
+                "outputs": [{"name":"output", "width":256, "output_inst":"layer98", "output_port":"conv_in"}]
+            },
+            {
+                "inst": "layer98", 
+                "kernel": "one_conv_2d_large_stream_norm_nobias_addrelu", 
+                "inputs": [{"name":"conv_in", "width":256}, {"name":"add_in", "width":1024}], 
+                "outputs": [{"name":"output", "width":1024, "output_inst":"layer102", "output_port":"input"}]
+            },
+            {
+                "inst": "layer102", 
+                "kernel": "split_one_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":1024}], 
+                "outputs": [{"name":"split_out", "width":1024, "output_inst":"layer108", "output_port":"add_in"}, {"name":"conv_out","width":1024, "output_inst":"layer105", "output_port":"input"}]
+            },
+            {
+                "inst": "layer105", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":1024}], 
+                "outputs": [{"name":"output", "width":256, "output_inst":"layer108", "output_port":"conv_in"}]
+            },
+            {
+                "inst": "layer108", 
+                "kernel": "one_conv_2d_large_stream_norm_nobias_addrelu", 
+                "inputs": [{"name":"conv_in", "width":256}, {"name":"add_in", "width":1024}], 
+                "outputs": [{"name":"output", "width":1024, "output_inst":"layer112", "output_port":"input"}]
+            },
+            {
+                "inst": "layer112", 
+                "kernel": "split_one_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":1024}], 
+                "outputs": [{"name":"split_out", "width":1024, "output_inst":"layer118", "output_port":"add_in"}, {"name":"conv_out","width":1024, "output_inst":"layer115", "output_port":"input"}]
+            },
+            {
+                "inst": "layer115", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":1024}], 
+                "outputs": [{"name":"output", "width":256, "output_inst":"layer118", "output_port":"conv_in"}]
+            },
+            {
+                "inst": "layer118", 
+                "kernel": "one_conv_2d_large_stream_norm_nobias_addrelu", 
+                "inputs": [{"name":"conv_in", "width":256}, {"name":"add_in", "width":1024}], 
+                "outputs": [{"name":"output", "width":1024, "output_inst":"layer122", "output_port":"input"}]
+            }
+        ]
+    },
+    {
+        "metadata":{"mac":"fa:16:3e:55:ca:04", "ip":"10.1.3.214"},
+        "ips":[
+            {
+                "inst": "layer122", 
+                "kernel": "split_one_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":1024}], 
+                "outputs": [{"name":"split_out", "width":1024, "output_inst":"layer128", "output_port":"add_in"}, {"name":"conv_out","width":1024, "output_inst":"layer125", "output_port":"input"}]
+            },
+            {
+                "inst": "layer125", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":1024}], 
+                "outputs": [{"name":"output", "width":256, "output_inst":"layer128", "output_port":"conv_in"}]
+            },
+            {
+                "inst": "layer128", 
+                "kernel": "one_conv_2d_large_stream_norm_nobias_addrelu", 
+                "inputs": [{"name":"conv_in", "width":256}, {"name":"add_in", "width":1024}], 
+                "outputs": [{"name":"output", "width":1024, "output_inst":"layer132", "output_port":"input"}]
+            },
+            {
+                "inst": "layer132", 
+                "kernel": "split_one_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":1024}], 
+                "outputs": [{"name":"split_out", "width":1024, "output_inst":"layer138", "output_port":"add_in"}, {"name":"conv_out","width":1024, "output_inst":"layer135", "output_port":"input"}]
+            },
+            {
+                "inst": "layer135", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":1024}], 
+                "outputs": [{"name":"output", "width":256, "output_inst":"layer138", "output_port":"conv_in"}]
+            },
+            {
+                "inst": "layer138", 
+                "kernel": "one_conv_2d_large_stream_norm_nobias_addrelu", 
+                "inputs": [{"name":"conv_in", "width":256}, {"name":"add_in", "width":1024}], 
+                "outputs": [{"name":"output", "width":1024, "output_inst":"layer142", "output_port":"input"}]
+            },
+            {
+                "inst": "layer142", 
+                "kernel": "split_one_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":1024}], 
+                "outputs": [{"name":"split_out", "width":1024, "output_inst":"layer150", "output_port":"conv_in"}, {"name":"conv_out","width":1024, "output_inst":"layer145", "output_port":"input"}]
+            },
+            {
+                "inst": "layer145", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":1024}], 
+                "outputs": [{"name":"output", "width":512, "output_inst":"layer148", "output_port":"conv_in"}]
+            },
+            {
+                "inst": "layer148", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":512}], 
+                "outputs": [{"name":"output", "width":2048, "output_inst":"layer150", "output_port":"add_in"}]
+            },
+            {
+                "inst": "layer150", 
+                "kernel": "one_conv_2d_large_stream_norm_resnet_addrelu", 
+                "inputs": [{"name":"conv_in", "width":1024}, {"name":"add_in", "width":2048}], 
+                "outputs": [{"name":"output", "width":2048, "output_inst":"layer154", "output_port":"input"}]
+            }
+        ]
+    },
+    {
+        "metadata":{"mac":"fa:16:3e:55:ca:05", "ip":"10.1.3.215"},
+        "ips":[
+            {
+                "inst": "layer154", 
+                "kernel": "split_one_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":2048}], 
+                "outputs": [{"name":"split_out", "width":2048, "output_inst":"layer160", "output_port":"add_in"}, {"name":"conv_out","width":2048, "output_inst":"layer157", "output_port":"input"}]
+            },
+            {
+                "inst": "layer157", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":2048}], 
+                "outputs": [{"name":"output", "width":512, "output_inst":"layer160", "output_port":"conv_in"}]
+            },
+            {
+                "inst": "layer160", 
+                "kernel": "one_conv_2d_large_stream_norm_nobias_addrelu", 
+                "inputs": [{"name":"conv_in", "width":512}, {"name":"add_in", "width":2048}], 
+                "outputs": [{"name":"output", "width":2048, "output_inst":"layer164", "output_port":"input"}]
+            },
+            {
+                "inst": "layer164", 
+                "kernel": "split_one_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":2048}], 
+                "outputs": [{"name":"split_out", "width":2048, "output_inst":"layer170", "output_port":"add_in"}, {"name":"conv_out","width":512, "output_inst":"layer167", "output_port":"input"}]
+            },
+            {
+                "inst": "layer167", 
+                "kernel": "conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":512}], 
+                "outputs": [{"name":"output", "width":513, "output_inst":"layer170", "output_port":"conv_in"}]
+            },
+            {
+                "inst": "layer170", 
+                "kernel": "one_conv_2d_large_stream_norm_nobias_addrelu", 
+                "inputs": [{"name":"conv_in", "width":512}, {"name":"add_in", "width":2048}], 
+                "outputs": [{"name":"output", "width":2048, "output_inst":"layer142", "output_port":"input"}]
+            },
+            {
+                "inst": "layer174", 
+                "kernel": "pool_2d_large_stream", 
+                "inputs": [{"name":"input", "width":2048}], 
+                "outputs": [{"name":"output", "width":2048, "dest":"100"}]
+            }
+
+        ]
+    }
+]
