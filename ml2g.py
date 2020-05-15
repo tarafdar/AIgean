@@ -36,7 +36,7 @@ def create_node(node):
     input_bridge_ip = {
                 "inst": node['ips'][0]['inst'] + "_input_bridge",
                 "inputs": [{"name":"bridge_in"}],
-                "wire_master" : [{"name":"iReset_out_V", "scope":"local"}],
+#                "wire_master" : [{"name":"iReset_out_V", "scope":"local"}],
                 #"const" : [],
                 "outputs": [],
                 "bridge":"input"
@@ -50,7 +50,7 @@ def create_node(node):
     #check first ip in each node to see type of input bridge
     if len(node['ips'][0]['inputs']) == 1:
         width = node['ips'][0]['inputs'][0]['width']
-        input_bridge_name = "hls4ml_galapagos_input_bridge_one_in_" + str(width)
+        input_bridge_name = "hls4ml_galapagos_input_bridge_" + str(width)
 #        input_bridge_ip["const"].append({"name":"width_V","val":width, "width":16})
         input_bridge_ip["outputs"].append({"name":"input", "width":width, "output_inst":node['ips'][0]["inst"], "output_port":node['ips'][0]["inputs"][0]["name"], "global":0})
     #two inputs
@@ -76,7 +76,7 @@ def create_node(node):
             ip['outputs'][_id]['global'] = 1
             ip['outputs'][_id]['local_node'] = 0
             ip['outputs'][_id]['local_port'] = 0
-        ip["wire_slave"] = {"name":"iReset", "master":{"node":kern_num, "port":"iReset_out_V"}, "scope":"local"}
+#        ip["wire_slave"] = {"name":"iReset", "master":{"node":kern_num, "port":"iReset_out_V"}, "scope":"local"}
         add_ip(ip, node_num)
 
     #connect input bridge to first kernel placed
@@ -230,13 +230,16 @@ def create_logical_file(logical_file_name):
 
                 for i in range(loop_bound):
                     if s_axis['global']:
-                        kern_elem["s_axis"].append({"name":(s_axis["name"]+"_" + str(i)+ "_V_V"), "scope":"global"})
+                        #kern_elem["s_axis"].append({"name":(s_axis["name"]+"_" + str(i)+ "_V_V"), "scope":"global"})
+                        kern_elem["s_axis"].append({"name":(s_axis["name"]+"_" + str(i)), "scope":"global"})
                     else:
                         #master_port = str(kerns[s_axis['local_node']]['outputs'][s_axis['local_port']]['name'])+ "_" +str(i) + "_V_V"
                         print(kern)
                         print(s_axis)
-                        master_port = str(s_axis['master']['port'])+ "_" +str(i) + "_V_V"
-                        kern_elem["s_axis"].append({"name":(s_axis["name"]+"_" + str(i)+ "_V_V"), "scope":"local", "master": {"node": s_axis['master']['node'], "port": master_port}})
+                        #master_port = str(s_axis['master']['port'])+ "_" +str(i) + "_V_V"
+                        master_port = str(s_axis['master']['port'])+ "_" +str(i)
+                        #kern_elem["s_axis"].append({"name":(s_axis["name"]+"_" + str(i)+ "_V_V"), "scope":"local", "master": {"node": s_axis['master']['node'], "port": master_port}})
+                        kern_elem["s_axis"].append({"name":(s_axis["name"]+"_" + str(i)), "scope":"local", "master": {"node": s_axis['master']['node'], "port": master_port}})
             else:
                 kern_elem["s_axis"].append({"name":(s_axis["name"]), "scope":"global"})
 
@@ -254,11 +257,14 @@ def create_logical_file(logical_file_name):
 
                 for i in range(loop_bound):
                     if m_axis['global']:
-                        kern_elem["m_axis"].append({"name":(m_axis["name"]+"_" + str(i)+ "_V_V"), "scope":"global"})
+                        kern_elem["m_axis"].append({"name":(m_axis["name"]+"_" + str(i)), "scope":"global"})
+                        #kern_elem["m_axis"].append({"name":(m_axis["name"]+"_" + str(i)+ "_V_V"), "scope":"global"})
                     else:
                         print(m_axis)
-                        slave_port = str(m_axis['slave']['port'])+ "_" +str(i) + "_V_V"
-                        kern_elem["m_axis"].append({"name":(m_axis["name"]+"_" + str(i)+ "_V_V"), "scope":"local",  "slave": {"node": m_axis['slave']['node'], "port": slave_port}})
+                        slave_port = str(m_axis['slave']['port'])+ "_" +str(i) 
+                        #slave_port = str(m_axis['slave']['port'])+ "_" +str(i) + "_V_V"
+                        kern_elem["m_axis"].append({"name":(m_axis["name"]+"_" + str(i)), "scope":"local",  "slave": {"node": m_axis['slave']['node'], "port": slave_port}})
+                        #kern_elem["m_axis"].append({"name":(m_axis["name"]+"_" + str(i)+ "_V_V"), "scope":"local",  "slave": {"node": m_axis['slave']['node'], "port": slave_port}})
             else:
                 if m_axis['global']:
                     kern_elem["m_axis"].append({"name":m_axis["name"], "scope":"global"})
@@ -300,11 +306,11 @@ def create_hierarchy(file_name):
     connect_nodes()
 
     local_kerns = kerns
-    create_map_file("examples/resnet50/map_aegean.json")
-    create_logical_file("examples/resnet50/logical_aegean.json",)
+    create_map_file("examples/resnet50_sample/map_aegean.json")
+    create_logical_file("examples/resnet50_sample/logical_aegean.json",)
 
 if __name__=='__main__':
-    create_hierarchy("examples/resnet50/resnet50.json")
+    create_hierarchy("examples/resnet50_sample/resnet50.json")
 
 
 

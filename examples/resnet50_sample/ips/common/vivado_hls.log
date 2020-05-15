@@ -1,0 +1,24 @@
+
+****** Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2018.3 (64-bit)
+  **** SW Build 2405991 on Thu Dec  6 23:36:41 MST 2018
+  **** IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source /opt/Xilinx/Vivado/2018.3/scripts/vivado_hls/hls.tcl -notrace
+INFO: [HLS 200-10] Running '/opt/Xilinx/Vivado/2018.3/bin/unwrapped/lnx64.o/vivado_hls'
+INFO: [HLS 200-10] For user 'tarafdar' on host 'localhost' (Linux_x86_64 version 4.4.0-159-generic) on Thu Apr 23 02:27:47 UTC 2020
+INFO: [HLS 200-10] On os Ubuntu 16.04.6 LTS
+INFO: [HLS 200-10] In directory '/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/common'
+synth.tcl can't be opened.
+couldn't read file "synth.tcl": no such file or directory
+    while executing
+"source synth.tcl"
+    invoked from within
+"hls::main synth.tcl common ../../../../../../hls4ml/example-models/resnet50-hls-full/firmware ../../../../galapagos"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel 1 hls::main {*}$args"
+    (procedure "hls_proc" line 5)
+    invoked from within
+"hls_proc $argv"
+INFO: [Common 17-206] Exiting vivado_hls at Thu Apr 23 02:27:47 2020...

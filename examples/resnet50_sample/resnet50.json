@@ -1,0 +1,38 @@
+[
+    {
+        "metadata":{"mac":"fa:16:3e:55:ca:02", "ip":"10.1.3.212"},
+        "ips":[
+            {
+                "inst": "layer2",
+                "kernel": "conv_2d_large_stream_norm_nobias_pool",
+                "inputs": [{"name":"input", "width":3}], 
+                "outputs": [{"name":"output","width":64, "output_inst":"layer6", "output_port":"input"}]
+            },
+            {
+                "inst": "layer6", 
+                "kernel": "split_conv_2d_large_stream_norm_nobias", 
+                "inputs": [{"name":"input", "width":64}], 
+                "outputs": [{"name":"split_out", "width":64, "output_inst":"layer14", "output_port":"conv_in"}, {"name":"conv_out","width":64, "output_inst":"layer9", "output_port":"input"}]
+            },
+            {
+                "inst": "layer9",
+                "kernel": "conv_2d_large_stream_norm_nobias",
+                "inputs": [{"name":"input", "width":64}], 
+                "outputs": [{"name":"output","width":64, "output_inst":"layer12", "output_port":"input"}]
+            },
+            {
+                "inst": "layer12",
+                "kernel": "conv_2d_large_stream_norm_nobias",
+                "inputs": [{"name":"input", "width":64}], 
+                "outputs": [{"name":"output","width":256, "output_inst":"layer14", "output_port":"add_in"}]
+            },
+            {
+                "inst": "layer14",
+                "kernel": "conv_2d_large_stream_norm_nobias_addrelu",
+                "inputs": [{"name":"conv_in", "width":64}, {"name":"add_in", "width":256}], 
+                "outputs": [{"name":"output","width":256, "dest":"100"}]
+            }
+
+        ]
+    }
+]

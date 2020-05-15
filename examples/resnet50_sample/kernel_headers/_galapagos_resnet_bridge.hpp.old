@@ -1,0 +1,196 @@
+#ifndef _GALAPAGOS_RESNET_BRIDGE
+#define _GALAPAGOS_RESNET_BRIDGE
+
+#include "resnet50.hpp"
+#include "packet_size.h"
+#ifdef CPU
+#include "galapagos_interface.hpp"
+#else
+#include "galapagos_packet.h"
+#endif
+
+template <int width, int total_size>
+void _hls4ml_galapagos_input_bridge_write_words(
+                                   galapagos_packet gp_in,
+                                   int index_offset,
+                                   int offset,
+                                   hls::stream<resnet50_packet >  input[total_size])
+
+{
+
+    for(int j=0; j<width; j++){
+#pragma HLS pipeline II=1 
+        resnet50_packet packet;
+        if(j == 0)
+            packet.id.range() = gp_in.data(offset, offset);
+        packet.data.range() = gp_in.data((j+1)*8 + offset + 7, (j+1)*8 + offset );
+        input[j+index_offset].write(packet);
+    }        
+}
+
+template <int width, int total_size>
+void _hls4ml_galapagos_input_bridge_write_words(
+                                   ap_uint<1> packet_reset,
+                                   galapagos_packet gp_in,
+                                   int index_offset,
+                                   int offset,
+                                   hls::stream<resnet50_packet >  input[total_size])
+
+{
+
+    for(int j=0; j<width; j++){
+#pragma HLS pipeline II=1 
+        resnet50_packet packet;
+        packet.id.range() = packet_reset.range();
+        packet.data.range() = gp_in.data((j)*8 + offset + 7, j*8 + offset);
+        input[j+index_offset].write(packet);
+    }        
+}
+
+template <int width>
+void _hls4ml_galapagos_input_bridge(galapagos_interface * bridge_in,
+                                   hls::stream<resnet50_packet > input[width])
+{
+
+
+    if (width == 3){
+        galapagos_packet gp_in;
+        gp_in = bridge_in->read();
+        resnet50_packet packet;
+        ap_uint<16> size;
+        size.range() = gp_in.data.range(15,0);
+        for(int i=0;i<size;i++){
+            int offset = 16 + i * 4 * 8;
+            _hls4ml_galapagos_input_bridge_write_words<width, width>(gp_in, 0, offset, input);
+        }
+    }
+    else if(width == 64){
+        galapagos_packet gp_in;
+        gp_in = bridge_in->read();
+        int offset = 0;
+        _hls4ml_galapagos_input_bridge_write_words<63, 64>(gp_in, 0, offset, input);
+        gp_in = bridge_in->read();
+        _hls4ml_galapagos_input_bridge_write_words<1, 64>(gp_in.data.range(0,0), gp_in, 63, offset, input);
+    }
+#ifdef CPU
+    else{
+        for(int i=0; i<=width/64; i++){
+            galapagos_packet gp_in;
+            gp_in = bridge_in->read();
+            int offset = 0;
+            ap_uint<1> packet_reset;
+            if(i==0){
+                _hls4ml_galapagos_input_bridge_write_words<63, width>(gp_in, 0,  offset, input);
+                packet_reset = gp_in.data.range(0,0);
+            }
+            else if(i == (width/64))
+                _hls4ml_galapagos_input_bridge_write_words<1, width>(packet_reset, gp_in, width - 1, offset, input);
+            else
+                _hls4ml_galapagos_input_bridge_write_words<64, width>(packet_reset, gp_in, (i*64) - 1,  offset, input);
+
+        }
+
+    }
+#else
+    else if(width == 128){
+
+
+    }
+
+
+#endif
+
+}
+                                   
+
+
+template <int width, int total_size>
+void _hls4ml_galapagos_output_bridge_read_words(
+                                   bool reset,
+                                   int index_offset,
+                                   galapagos_packet  & gp_out,
+                                   int offset,
+                                   hls::stream<resnet50_packet >  output[total_size])
+{
+
+    for(int j=0; j<width; j++){
+#pragma HLS pipeline II=1 
+        if(!output[j + index_offset].empty()){
+            resnet50_packet packet;
+            packet = output[j+index_offset].read();
+            if(reset){
+                if(j == 0)
+                    gp_out.data(offset, offset) = packet.id.range();
+                gp_out.data.range((j+1)*8 + offset + 7, (j+1)*8 + offset) = packet.data.range();
+            }
+            else
+                gp_out.data.range((j)*8 + offset + 7, (j)*8 + offset) = packet.data.range();
+        }
+    }
+}
+
+template<int width>
+void _hls4ml_galapagos_output_bridge (
+                                    ap_uint<16> size,
+                                    hls::stream<resnet50_packet> output[width],
+                                    galapagos_interface * bridge_output,
+                                    const ap_uint <8> dest
+                    )
+{
+
+    if(width == 3){
+        galapagos_packet gp_out;
+        gp_out.data.range(15,0) = size;
+        gp_out.data = gp_out.data & 0x0ffff;
+        for(int i=0; i<size; i++){
+#pragma HLS pipeline II=1 
+            int offset = 16 + i*4*8;
+            _hls4ml_galapagos_output_bridge_read_words<3,3>(true,0, gp_out, offset, output);
+        }
+        gp_out.dest = dest;
+        gp_out.last = 1;
+        bridge_output->write(gp_out);
+    }
+    else if(width == 64){
+        galapagos_packet gp_out;
+        gp_out.last = 0;
+        gp_out.dest = dest;
+        _hls4ml_galapagos_output_bridge_read_words<63, 64>(true, 0, gp_out, 0, output);
+        bridge_output->write(gp_out);
+        gp_out.last = 1;
+        _hls4ml_galapagos_output_bridge_read_words<1, 64>(false, 63, gp_out, 0, output);
+        bridge_output->write(gp_out);
+    }
+    else{
+        for(int i=0; i<=width/64; i++){
+            galapagos_packet gp_out;
+            gp_out.last = 0;
+            gp_out.dest = dest;
+            bool packet_reset;
+            if(i==0){
+                _hls4ml_galapagos_output_bridge_read_words<63, width>(true, 0, gp_out, 0, output);
+            }
+            else if(i == (width/64)){
+                _hls4ml_galapagos_output_bridge_read_words<1, width>(false, width - 1, gp_out, 0, output);
+                gp_out.last = 1;
+            }
+            else{
+                _hls4ml_galapagos_output_bridge_read_words<64, width>(false, (i*64)- 1, gp_out, 0, output);
+            }
+            bridge_output->write(gp_out);
+
+        }
+    }
+}
+
+template<int width>
+void _hls4ml_galapagos_output_bridge (
+                                    hls::stream<resnet50_packet> output[width],
+                                    galapagos_interface * bridge_output,
+                                    const ap_uint <8> dest
+                    )
+{
+
+    _hls4ml_galapagos_output_bridge <256> (1, output, bridge_output, dest);
+}
+#endif

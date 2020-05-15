@@ -1,0 +1,697 @@
+
+****** Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2019.1.3 (64-bit)
+  **** SW Build 2644227 on Wed Sep  4 09:44:18 MDT 2019
+  **** IP Build 2633630 on Wed Sep  4 12:30:14 MDT 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source /opt/Xilinx/Vivado/2019.1/scripts/vivado_hls/hls.tcl -notrace
+INFO: [HLS 200-10] Running '/opt/Xilinx/Vivado/2019.1/bin/unwrapped/lnx64.o/vivado_hls'
+INFO: [HLS 200-10] For user 'tarafdar' on host 'localhost' (Linux_x86_64 version 4.4.0-159-generic) on Tue May 12 01:45:05 UTC 2020
+INFO: [HLS 200-10] On os Ubuntu 16.04.6 LTS
+INFO: [HLS 200-10] In directory '/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9'
+Sourcing Tcl script 'synth.tcl'
+INFO: [HLS 200-10] Creating and opening project '/home/tarafdar/workDir/reproducability/galapagos/userIP/hls_projects/resnet_layer9'.
+INFO: [HLS 200-10] Creating and opening solution '/home/tarafdar/workDir/reproducability/galapagos/userIP/hls_projects/resnet_layer9/solution1'.
+WARNING: [HLS 200-483] The 'config_rtl -prefix' command is deprecated and will be removed in a future release. Use 'config_rtl -module_prefix' as its replacement.
+INFO: [HLS 200-10] Setting target device to 'xczu19eg-ffvc1760-2-i'
+INFO: [HLS 200-10] Adding design file '/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp' to the project
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 4ns.
+INFO: [SCHED 204-61] Option 'relax_ii_for_timing' is enabled, will increase II to preserve clock frequency constraints.
+INFO: [HLS 200-10] Analyzing design file '/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp' ... 
+WARNING: [HLS 200-40] In file included from /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:1:
+In file included from /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:5:
+In file included from /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_conv_2d_large_stream_norm_nobias_pool.hpp:8:
+In file included from /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_conv_2d_large_stream_norm_nobias.hpp:8:
+/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_stream_resnet50_conversion.hpp:69:1: warning: control reaches end of non-void function [-Wreturn-type]
+}
+^
+/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_conv_2d_large_stream_norm_nobias.hpp:42:32: note: in instantiation of function template specialization '_output_to_stream<ap_fixed<8, 6, 5, 3, 0>, 64>' requested here
+    if(!conv_output[0].empty())_output_to_stream<_LAYER_T, _N_OUTPUT>( reset, conv_output, output );
+                               ^
+/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:24:2: note: in instantiation of function template specialization '_conv_2d_large_stream_norm_nobias<ap_fixed<8, 6, 5, 3, 0>, ap_fixed<8, 6, 5, 3, 0>, config9, 64, 64>' requested here
+ _conv_2d_large_stream_norm_nobias<layer6_t, layer9_t, config9, 64, 64> (input, output, w9, s10, b10);
+ ^
+1 warning generated.
+WARNING: [HLS 214-114] Since the only kind of statements allowed in a dataflow region are variable declarations and function calls, the compiler may not be able to correctly handle the region: /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense.h:139:9
+WARNING: [HLS 214-104] Only for-loops and functions support the dataflow: /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense.h:151:9
+WARNING: [HLS 214-104] Only for-loops and functions support the dataflow: /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_batchnorm.h:76:9
+WARNING: [HLS 214-111] Static scalars and arrays declared inside a dataflow region will be treated like local variables: /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_conv_2d_large_stream_norm_nobias.hpp:33:34
+WARNING: [HLS 214-114] Since the only kind of statements allowed in a dataflow region are variable declarations and function calls, the compiler may not be able to correctly handle the region: /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_pool.hpp:32:2
+WARNING: [HLS 214-113] Either use an argument of the function or declare the variable inside the dataflow loop body: /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:24:89
+WARNING: [HLS 200-471] Dataflow form checks found 6 issue(s) in file /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp
+INFO: [HLS 200-111] Finished Linking Time (s): cpu = 00:00:49 ; elapsed = 00:00:51 . Memory (MB): peak = 826.637 ; gain = 128.000 ; free physical = 851 ; free virtual = 45922
+INFO: [HLS 200-111] Finished Checking Pragmas Time (s): cpu = 00:00:49 ; elapsed = 00:00:51 . Memory (MB): peak = 826.637 ; gain = 128.000 ; free physical = 851 ; free virtual = 45922
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms Time (s): cpu = 00:01:45 ; elapsed = 00:01:49 . Memory (MB): peak = 1018.637 ; gain = 320.000 ; free physical = 686 ; free virtual = 45764
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [XFORM 203-602] Inlining function 'nnet::cast<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_mult>' into 'nnet::dense_large_nobias_rf_leq_nin<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_mult>' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense_large.h:354) automatically.
+INFO: [XFORM 203-602] Inlining function 'nnet::dense_large_nobias<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_mult>' into 'nnet::conv_2d_large_stream_norm_nobias<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:1152) automatically.
+INFO: [XFORM 203-602] Inlining function 'nnet::normalize2<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_norm>' into 'nnet::conv_2d_large_stream_norm_nobias<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:1153) automatically.
+INFO: [HLS 200-111] Finished Checking Synthesizability Time (s): cpu = 00:01:46 ; elapsed = 00:01:50 . Memory (MB): peak = 1018.637 ; gain = 320.000 ; free physical = 679 ; free virtual = 45758
+INFO: [XFORM 203-502] Unrolling all loops for pipelining in function 'nnet::fill_image_2dS1<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:256:46).
+INFO: [XFORM 203-502] Unrolling all loops for pipelining in function 'nnet::relu<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_relu>' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_activation.h:73:46).
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'ReuseLoop' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense_large.h:316) in function 'nnet::dense_large_nobias_rf_leq_nin<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_mult>' for pipelining.
+INFO: [XFORM 203-502] Unrolling all loops for pipelining in function 'nnet::shift_right_stride_2dNew<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:560:51).
+INFO: [XFORM 203-502] Unrolling all loops for pipelining in function 'nnet::shift_right_small_stride<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:464:51).
+WARNING: [XFORM 203-505] Ignored pipeline directive for loop 'Loop-1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:464) because its parent loop or function is pipelined.
+INFO: [XFORM 203-502] Unrolling all loops for pipelining in function 'nnet::reset_down_2dXNew<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:738:46).
+INFO: [HLS 200-489] Unrolling loop 'Loop-1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:1145) in function 'nnet::conv_2d_large_stream_norm_nobias<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' completely with a factor of 64.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:257) in function 'nnet::fill_image_2dS1<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' completely with a factor of 64.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_activation.h:84) in function 'nnet::relu<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_relu>' completely with a factor of 64.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_batchnorm.h:113) in function 'nnet::normalize2<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_norm>' completely with a factor of 64.
+INFO: [HLS 200-489] Unrolling loop 'InitAccum' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense_large.h:311) in function 'nnet::dense_large_nobias_rf_leq_nin<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_mult>' completely with a factor of 64.
+INFO: [HLS 200-489] Unrolling loop 'MultLoop' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense_large.h:327) in function 'nnet::dense_large_nobias_rf_leq_nin<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_mult>' completely with a factor of 1152.
+INFO: [HLS 200-489] Unrolling loop 'Loop-2.2' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense_large.h:337) in function 'nnet::dense_large_nobias_rf_leq_nin<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_mult>' completely with a factor of 1152.
+INFO: [HLS 200-489] Unrolling loop 'Result' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense_large.h:352) in function 'nnet::dense_large_nobias_rf_leq_nin<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_mult>' completely with a factor of 64.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:573) in function 'nnet::shift_right_stride_2dNew<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' completely with a factor of 3.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:576) in function 'nnet::shift_right_stride_2dNew<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' completely with a factor of 64.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:464) in function 'nnet::shift_right_small_stride<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' completely with a factor of 2.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:466) in function 'nnet::shift_right_small_stride<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' completely with a factor of 3.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1.1.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:467) in function 'nnet::shift_right_small_stride<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' completely with a factor of 64.
+INFO: [HLS 200-489] Unrolling loop 'Loop-2' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:474) in function 'nnet::shift_right_small_stride<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' completely with a factor of 3.
+INFO: [HLS 200-489] Unrolling loop 'Loop-2.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:476) in function 'nnet::shift_right_small_stride<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' completely with a factor of 64.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:742) in function 'nnet::reset_down_2dXNew<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' completely with a factor of 1.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:743) in function 'nnet::reset_down_2dXNew<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' completely with a factor of 3.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1.1.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:745) in function 'nnet::reset_down_2dXNew<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' completely with a factor of 64.
+INFO: [HLS 200-489] Unrolling loop 'Loop-2' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:750) in function 'nnet::reset_down_2dXNew<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' completely with a factor of 2.
+INFO: [HLS 200-489] Unrolling loop 'Loop-2.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:751) in function 'nnet::reset_down_2dXNew<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' completely with a factor of 3.
+INFO: [HLS 200-489] Unrolling loop 'Loop-2.1.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:752) in function 'nnet::reset_down_2dXNew<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' completely with a factor of 64.
+INFO: [XFORM 203-131] Reshaping array 'layer_in_row.V'  in dimension 3 completely.
+INFO: [XFORM 203-131] Reshaping array 'layer_in.V'  in dimension 1 completely.
+INFO: [XFORM 203-131] Reshaping array 'layer_normout.V'  in dimension 1 completely.
+INFO: [XFORM 203-131] Reshaping array 'layer_reluout.V'  in dimension 1 completely.
+INFO: [XFORM 203-131] Reshaping array 'layer_out.V'  in dimension 1 completely.
+INFO: [XFORM 203-131] Reshaping array 's10.V'  in dimension 1 completely.
+INFO: [XFORM 203-131] Reshaping array 'b10.V'  in dimension 1 completely.
+INFO: [XFORM 203-131] Reshaping array 'w9.V'  in dimension 1 with a block factor of 1152.
+INFO: [XFORM 203-131] Reshaping array 'tmpmult.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense_large.h:323) in dimension 1 completely.
+INFO: [XFORM 203-131] Reshaping array 'tmpinput.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:569) in dimension 1 completely.
+INFO: [XFORM 203-131] Reshaping array 'tmpinput.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:569) in dimension 2 completely.
+INFO: [XFORM 203-131] Reshaping array 'tmpinput.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:569) in dimension 3 completely.
+INFO: [XFORM 203-102] Automatically partitioning streamed array 'conv_output.V.V' .
+INFO: [XFORM 203-102] Automatically partitioning streamed array 'input.V.data.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:15) .
+INFO: [XFORM 203-102] Automatically partitioning streamed array 'input.V.id.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:15) .
+INFO: [XFORM 203-102] Automatically partitioning streamed array 'output.V.data.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:16) .
+INFO: [XFORM 203-102] Automatically partitioning streamed array 'output.V.id.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:16) .
+INFO: [XFORM 203-102] Automatically partitioning streamed array 'conv_input' .
+INFO: [XFORM 203-101] Partitioning array 'acc.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense_large.h:307) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'conv_output.V.V' in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'input.V.data.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:15) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'input.V.id.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:15) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'output.V.data.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:16) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'output.V.id.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:16) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'conv_input' in dimension 1 completely.
+WARNING: [XFORM 203-104] Completely partitioning array 'conv_output.V.V' accessed through non-constant indices on dimension 1 (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_stream_resnet50_conversion.hpp:54:20), which may result in long runtime and suboptimal QoR due to large multiplexers. Please consider wrapping the array access into a function or using a register file core instead.
+WARNING: [XFORM 203-104] Completely partitioning array 'output.V.data.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:16) accessed through non-constant indices on dimension 1 (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_stream_resnet50_conversion.hpp:61:13), which may result in long runtime and suboptimal QoR due to large multiplexers. Please consider wrapping the array access into a function or using a register file core instead.
+WARNING: [XFORM 203-104] Completely partitioning array 'output.V.id.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:16) accessed through non-constant indices on dimension 1 (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_stream_resnet50_conversion.hpp:61:13), which may result in long runtime and suboptimal QoR due to large multiplexers. Please consider wrapping the array access into a function or using a register file core instead.
+WARNING: [XFORM 203-104] Completely partitioning array 'input.V.data.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:15) accessed through non-constant indices on dimension 1 (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_stream_resnet50_conversion.hpp:18:20), which may result in long runtime and suboptimal QoR due to large multiplexers. Please consider wrapping the array access into a function or using a register file core instead.
+WARNING: [XFORM 203-104] Completely partitioning array 'input.V.id.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../srcs/conv_2d_large_stream_norm_nobias.cpp:15) accessed through non-constant indices on dimension 1 (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_stream_resnet50_conversion.hpp:18:20), which may result in long runtime and suboptimal QoR due to large multiplexers. Please consider wrapping the array access into a function or using a register file core instead.
+WARNING: [XFORM 203-104] Completely partitioning array 'conv_input' accessed through non-constant indices on dimension 1 (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_stream_resnet50_conversion.hpp:22:13), which may result in long runtime and suboptimal QoR due to large multiplexers. Please consider wrapping the array access into a function or using a register file core instead.
+INFO: [XFORM 203-602] Inlining function 'nnet::cast<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_mult>' into 'nnet::dense_large_nobias_rf_leq_nin<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_mult>.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense_large.h:354) automatically.
+INFO: [XFORM 203-602] Inlining function 'nnet::dense_large_nobias<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_mult>' into 'nnet::conv_2d_large_stream_norm_nobias<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' automatically.
+INFO: [XFORM 203-622] Instantiating function 'nnet::dense_large_nobias_rf_leq_nin<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_mult>.1'(/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense_large.h:316:16) to 'nnet::dense_large_nobias_rf_leq_nin<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_mult>.1.0' by setting 'weights.V' to 'w9.V'.
+INFO: [XFORM 203-712] Applying dataflow to function '_conv_2d_large_stream_norm_nobias<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9, 64, 64>', detected/extracted 2 process function(s): 
+	 '_stream_to_input<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, 64>'
+	 '_conv_2d_large_stream_norm_nobias<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9, 64, 64>_Block_codeRepl261262_proc'.
+INFO: [XFORM 203-712] Applying dataflow to function 'conv_2d_large_stream_norm_nobias', detected/extracted 1 process function(s): 
+	 '_conv_2d_large_stream_norm_nobias<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9, 64, 64>'.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:557:40) to (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:557:40) in function 'nnet::shift_right_stride_2dNew<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>'... converting 577 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_stream_resnet50_conversion.hpp:54:20) to (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_stream_resnet50_conversion.hpp:61:13) in function '_output_to_stream<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, 64>'... converting 3 basic blocks.
+INFO: [XFORM 203-11] Balancing expressions in function 'nnet::dense_large_nobias_rf_leq_nin<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_mult>.1.0' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense_large.h:287:16)...1152 expression(s) balanced.
+INFO: [HLS 200-111] Finished Pre-synthesis Time (s): cpu = 00:08:38 ; elapsed = 00:08:44 . Memory (MB): peak = 1018.637 ; gain = 320.000 ; free physical = 380 ; free virtual = 45636
+WARNING: [XFORM 203-631] Renaming function 'nnet::shift_right_stride_2dNew<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' to 'shift_right_stride_2' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:557:40)
+WARNING: [XFORM 203-631] Renaming function 'nnet::shift_right_small_stride<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>.1' to 'shift_right_small_st' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:459:17)
+WARNING: [XFORM 203-631] Renaming function 'nnet::reset_down_2dXNew<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' to 'reset_down_2dXNew' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:741:1)
+WARNING: [XFORM 203-631] Renaming function 'nnet::relu<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_relu>' to 'relu' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_activation.h:73:1)
+WARNING: [XFORM 203-631] Renaming function 'nnet::product<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0> >' to 'product' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense.h:90:9)
+WARNING: [XFORM 203-631] Renaming function 'nnet::normalize2<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_norm>' to 'normalize2' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_batchnorm.h:115:1)
+WARNING: [XFORM 203-631] Renaming function 'nnet::fill_image_2dS1<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' to 'fill_image_2dS1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:256:2)
+WARNING: [XFORM 203-631] Renaming function 'nnet::dense_large_nobias_rf_leq_nin<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9_mult>.1.0' to 'dense_large_nobias_r' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense_large.h:287:16)
+WARNING: [XFORM 203-631] Renaming function 'nnet::conv_2d_large_stream_norm_nobias<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9>' to 'conv_2d_large_stream.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:1144:5)
+WARNING: [XFORM 203-631] Renaming function '_stream_to_input<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, 64>' to '_stream_to_input' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_stream_resnet50_conversion.hpp:10:31)
+WARNING: [XFORM 203-631] Renaming function '_output_to_stream<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, 64>' to '_output_to_stream' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_stream_resnet50_conversion.hpp:49:32)
+WARNING: [XFORM 203-631] Renaming function '_conv_2d_large_stream_norm_nobias<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9, 64, 64>_Block_codeRepl261262_proc' to '_conv_2d_large_strea' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_conv_2d_large_stream_norm_nobias.hpp:37:32)
+WARNING: [XFORM 203-631] Renaming function '_conv_2d_large_stream_norm_nobias<ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, ap_fixed<8, 6, (ap_q_mode)5, (ap_o_mode)3, 0>, config9, 64, 64>' to '_conv_2d_large_strea.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../kernel_headers/_conv_2d_large_stream_norm_nobias.hpp:20:1)
+INFO: [XFORM 203-531] Rewinding loop 'ReuseLoop' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_dense_large.h:316) in function 'dense_large_nobias_r'.
+WARNING: [XFORM 203-561] Ignored multiple trip count directives for loop 'ReuseLoop' in function 'dense_large_nobias_r'.
+INFO: [HLS 200-111] Finished Architecture Synthesis Time (s): cpu = 00:09:58 ; elapsed = 00:10:06 . Memory (MB): peak = 1162.637 ; gain = 464.000 ; free physical = 566 ; free virtual = 45779
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'conv_2d_large_stream_norm_nobias' ...
+WARNING: [SYN 201-103] Legalizing function name '_stream_to_input' to 'p_stream_to_input'.
+WARNING: [SYN 201-103] Legalizing function name 'conv_2d_large_stream.1' to 'conv_2d_large_stream_1'.
+WARNING: [SYN 201-103] Legalizing function name '_output_to_stream' to 'p_output_to_stream'.
+WARNING: [SYN 201-103] Legalizing function name '_conv_2d_large_strea' to 'p_conv_2d_large_strea'.
+WARNING: [SYN 201-103] Legalizing function name '_conv_2d_large_strea.1' to 'p_conv_2d_large_strea_1'.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_stream_to_input' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 611.91 seconds; current allocated memory: 435.408 MB.
+INFO: [HLS 200-434] Only 0 loops out of a total 1 loops have been pipelined in this design.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 1.59 seconds; current allocated memory: 438.027 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'reset_down_2dXNew' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'reset_down_2dXNew'.
+WARNING: [SCHED 204-69] Unable to schedule 'load' operation ('input_V_load_4', /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:746) on array 'input_V' due to limited memory ports. Please consider using a memory core with more ports or partitioning the array 'input_V'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 2, Depth = 38.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 1.25 seconds; current allocated memory: 438.280 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.35 seconds; current allocated memory: 438.572 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'shift_right_small_st' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'shift_right_small_st'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 1.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.42 seconds; current allocated memory: 439.313 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.47 seconds; current allocated memory: 440.662 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'shift_right_stride_2' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'shift_right_stride_2'.
+WARNING: [SCHED 204-69] Unable to schedule 'load' operation ('input_V_load_2', /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer9/../../../../../../hls4ml/example-models/resnet50-hls-full/firmware/nnet_utils/nnet_conv2d_large.h:578) on array 'input_V' due to limited memory ports. Please consider using a memory core with more ports or partitioning the array 'input_V'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 2, Depth = 38.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.68 seconds; current allocated memory: 442.196 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 1.52 seconds; current allocated memory: 444.546 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'product' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'product'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 1.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 1.57 seconds; current allocated memory: 444.954 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.03 seconds; current allocated memory: 445.000 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'dense_large_nobias_r' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'ReuseLoop'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 4.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 11.99 seconds; current allocated memory: 457.621 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 14.25 seconds; current allocated memory: 477.674 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'normalize2' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 13.34 seconds; current allocated memory: 481.336 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 1.02 seconds; current allocated memory: 482.702 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'relu' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'relu'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 1.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 1.05 seconds; current allocated memory: 483.917 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.83 seconds; current allocated memory: 485.573 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'fill_image_2dS1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'fill_image_2dS1'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 1.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 2.57 seconds; current allocated memory: 486.300 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.46 seconds; current allocated memory: 487.724 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'conv_2d_large_stream_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+WARNING: [SCHED 204-21] Estimated clock period (4.511ns) exceeds the target (target clock period: 4ns, clock uncertainty: 0.5ns, effective delay budget: 3.5ns).
+WARNING: [SCHED 204-21] The critical path in module 'conv_2d_large_stream_1' consists of the following:
+	'load' operation ('layer_out_V_load') on static variable 'layer_out_V' [360]  (0 ns)
+	'call' operation ('call_ret1_i') to 'normalize2' [361]  (1.55 ns)
+	'call' operation ('call_ret2_i') to 'relu' [362]  (1.21 ns)
+	'call' operation ('_ln0') to 'fill_image_2dS1' [363]  (1.75 ns)
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 2.18 seconds; current allocated memory: 488.454 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 6.73 seconds; current allocated memory: 493.954 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_output_to_stream' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 8.36 seconds; current allocated memory: 498.207 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 1.11 seconds; current allocated memory: 501.330 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_conv_2d_large_strea' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 1.2 seconds; current allocated memory: 501.794 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 4.34 seconds; current allocated memory: 506.653 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_conv_2d_large_strea_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 6.32 seconds; current allocated memory: 510.383 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 4.54 seconds; current allocated memory: 515.535 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'conv_2d_large_stream_norm_nobias' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 6.59 seconds; current allocated memory: 519.349 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 3 seconds; current allocated memory: 522.901 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_stream_to_input' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_stream_to_input'.
+INFO: [HLS 200-111]  Elapsed time: 7.03 seconds; current allocated memory: 539.043 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'reset_down_2dXNew' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'conv_2d_large_stream_norm_nobias_urem_32ns_3ns_3_36_1': 3 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'reset_down_2dXNew'.
+INFO: [HLS 200-111]  Elapsed time: 2.87 seconds; current allocated memory: 546.484 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'shift_right_small_st' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'shift_right_small_st'.
+INFO: [HLS 200-111]  Elapsed time: 0.52 seconds; current allocated memory: 550.487 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'shift_right_stride_2' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'conv_2d_large_stream_norm_nobias_urem_32ns_3ns_9_36_1': 3 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'shift_right_stride_2'.
+INFO: [HLS 200-111]  Elapsed time: 0.74 seconds; current allocated memory: 558.215 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'product' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'product'.
+INFO: [HLS 200-111]  Elapsed time: 2.51 seconds; current allocated memory: 566.006 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'dense_large_nobias_r' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-104] Estimated max fanout for 'dense_large_nobias_r' is 92389 from HDL expression: ((1'b0 == ap_block_pp0_stage0_11001) & (1'b1 == ap_CS_fsm_pp0_stage0))
+INFO: [RTGEN 206-100] Finished creating RTL model for 'dense_large_nobias_r'.
+INFO: [HLS 200-111]  Elapsed time: 33.35 seconds; current allocated memory: 605.556 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'normalize2' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'normalize2'.
+INFO: [HLS 200-111]  Elapsed time: 24.17 seconds; current allocated memory: 687.920 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'relu' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'relu'.
+INFO: [HLS 200-111]  Elapsed time: 3.1 seconds; current allocated memory: 694.948 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'fill_image_2dS1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'fill_image_2dS1'.
+INFO: [HLS 200-111]  Elapsed time: 3.29 seconds; current allocated memory: 701.636 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'conv_2d_large_stream_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Register 'pY' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'pX' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'pPass' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'layer_in_V' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'layer_out_V' is power-on initialization.
+INFO: [RTGEN 206-100] Generating core module 'conv_2d_large_stream_norm_nobias_urem_32ns_3ns_9_36_seq_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'conv_2d_large_stream_1'.
+INFO: [HLS 200-111]  Elapsed time: 2.93 seconds; current allocated memory: 708.573 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_output_to_stream' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_output_to_stream'.
+INFO: [HLS 200-111]  Elapsed time: 9.39 seconds; current allocated memory: 728.775 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_conv_2d_large_strea' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_conv_2d_large_strea'.
+INFO: [HLS 200-111]  Elapsed time: 7.38 seconds; current allocated memory: 750.729 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_conv_2d_large_strea_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] RTL name 'fifo_w8_d1_A' is changed to 'fifo_w8_d1_A_x' due to conflict.
+INFO: [HLS 200-633] Setting ap_ctrl_none interface for _conv_2d_large_strea.1
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_conv_2d_large_strea_1'.
+INFO: [HLS 200-111]  Elapsed time: 11.32 seconds; current allocated memory: 764.451 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'conv_2d_large_stream_norm_nobias' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_0_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_1_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_2_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_3_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_4_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_5_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_6_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_7_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_8_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_9_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_10_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_11_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_12_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_13_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_14_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_15_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_16_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_17_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_18_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_19_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_20_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_21_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_22_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_23_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_24_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_25_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_26_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_27_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_28_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_29_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_30_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_31_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_32_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_33_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_34_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_35_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_36_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_37_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_38_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_39_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_40_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_41_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_42_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_43_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_44_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_45_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_46_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_47_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_48_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_49_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_50_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_51_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_52_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_53_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_54_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_55_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_56_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_57_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_58_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_59_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_60_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_61_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_62_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_63_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_0_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_1_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_2_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_3_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_4_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_5_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_6_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_7_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_8_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_9_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_10_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_11_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_12_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_13_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_14_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_15_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_16_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_17_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_18_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_19_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_20_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_21_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_22_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_23_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_24_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_25_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_26_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_27_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_28_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_29_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_30_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_31_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_32_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_33_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_34_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_35_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_36_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_37_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_38_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_39_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_40_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_41_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_42_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_43_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_44_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_45_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_46_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_47_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_48_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_49_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_50_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_51_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_52_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_53_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_54_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_55_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_56_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_57_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_58_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_59_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_60_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_61_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_62_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/input_63_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_0_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_1_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_2_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_3_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_4_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_5_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_6_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_7_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_8_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_9_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_10_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_11_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_12_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_13_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_14_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_15_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_16_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_17_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_18_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_19_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_20_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_21_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_22_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_23_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_24_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_25_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_26_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_27_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_28_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_29_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_30_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_31_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_32_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_33_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_34_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_35_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_36_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_37_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_38_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_39_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_40_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_41_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_42_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_43_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_44_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_45_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_46_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_47_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_48_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_49_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_50_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_51_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_52_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_53_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_54_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_55_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_56_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_57_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_58_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_59_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_60_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_61_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_62_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_63_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_0_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_1_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_2_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_3_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_4_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_5_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_6_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_7_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_8_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_9_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_10_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_11_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_12_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_13_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_14_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_15_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_16_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_17_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_18_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_19_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_20_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_21_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_22_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_23_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_24_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_25_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_26_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_27_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_28_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_29_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_30_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_31_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_32_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_33_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_34_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_35_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_36_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_37_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_38_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_39_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_40_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_41_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_42_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_43_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_44_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_45_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_46_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_47_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_48_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_49_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_50_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_51_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_52_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_53_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_54_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_55_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_56_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_57_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_58_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_59_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_60_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_61_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_62_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_stream_norm_nobias/output_63_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on function 'conv_2d_large_stream_norm_nobias' to 'ap_ctrl_none'.
+INFO: [HLS 200-633] Setting ap_ctrl_none interface for conv_2d_large_stream_norm_nobias
+INFO: [RTGEN 206-100] Finished creating RTL model for 'conv_2d_large_stream_norm_nobias'.
+INFO: [HLS 200-111]  Elapsed time: 10.8 seconds; current allocated memory: 774.436 MB.
+INFO: [RTMG 210-282] Generating pipelined core: 'layer9_conv_2d_large_stream_norm_nobias_urem_32ns_3ns_3_36_1_div'
+INFO: [RTMG 210-282] Generating pipelined core: 'layer9_conv_2d_large_stream_norm_nobias_urem_32ns_3ns_9_36_1_div'
+INFO: [RTMG 210-279] Implementing memory 'layer9_dense_large_nobias_r_w9_V_rom' using auto ROMs.
+INFO: [RTMG 210-282] Generating pipelined core: 'layer9_conv_2d_large_stream_norm_nobias_urem_32ns_3ns_9_36_seq_1_div'
+INFO: [RTMG 210-278] Implementing memory 'layer9_conv_2d_large_stream_1_layer_in_row_V_ram (RAM)' using block RAMs with power-on initialization.
+INFO: [RTMG 210-285] Implementing FIFO 'start_for_p_conv_2d_large_strea_U0_U(layer9_start_for_p_conv_2d_large_strea_U0)' using Shift Registers.
+INFO: [HLS 200-111] Finished generating all RTL models Time (s): cpu = 00:13:32 ; elapsed = 00:14:23 . Memory (MB): peak = 1484.152 ; gain = 785.516 ; free physical = 424 ; free virtual = 45230
+INFO: [VHDL 208-304] Generating VHDL RTL for conv_2d_large_stream_norm_nobias with prefix layer9_.
+INFO: [VLOG 209-307] Generating Verilog RTL for conv_2d_large_stream_norm_nobias with prefix layer9_.
+INFO: [IMPL 213-8] Exporting RTL as a Vivado IP.
+
+****** Vivado v2019.1.3 (64-bit)
+  **** SW Build 2644227 on Wed Sep  4 09:44:18 MDT 2019
+  **** IP Build 2633630 on Wed Sep  4 12:30:14 MDT 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source run_ippack.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2019.1/data/ip'.
+INFO: [Common 17-206] Exiting Vivado at Tue May 12 02:00:20 2020...
+INFO: [HLS 200-112] Total elapsed time: 918.53 seconds; peak allocated memory: 774.436 MB.
+INFO: [Common 17-206] Exiting vivado_hls at Tue May 12 02:00:23 2020...

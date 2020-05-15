@@ -1,0 +1,80 @@
+mkdir -p ""../../../../galapagos"/userIP/hls_projects"
+vivado_hls "."/synth.tcl -tclargs layer2 "../../../../../../hls4ml/example-models/resnet50-hls-full/firmware" "../../../../galapagos"
+
+****** Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2019.1.3 (64-bit)
+  **** SW Build 2644227 on Wed Sep  4 09:44:18 MDT 2019
+  **** IP Build 2633630 on Wed Sep  4 12:30:14 MDT 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source /opt/Xilinx/Vivado/2019.1/scripts/vivado_hls/hls.tcl -notrace
+INFO: [HLS 200-10] Running '/opt/Xilinx/Vivado/2019.1/bin/unwrapped/lnx64.o/vivado_hls'
+INFO: [HLS 200-10] For user 'tarafdar' on host 'localhost' (Linux_x86_64 version 4.4.0-159-generic) on Wed May 06 22:21:33 UTC 2020
+INFO: [HLS 200-10] On os Ubuntu 16.04.6 LTS
+INFO: [HLS 200-10] In directory '/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2'
+Sourcing Tcl script './synth.tcl'
+INFO: [HLS 200-10] Creating and opening project '/home/tarafdar/workDir/reproducability/AIgean/galapagos/userIP/hls_projects/resnet_layer2'.
+INFO: [HLS 200-10] Creating and opening solution '/home/tarafdar/workDir/reproducability/AIgean/galapagos/userIP/hls_projects/resnet_layer2/solution1'.
+WARNING: [HLS 200-483] The 'config_rtl -prefix' command is deprecated and will be removed in a future release. Use 'config_rtl -module_prefix' as its replacement.
+INFO: [HLS 200-10] Setting target device to 'xczu19eg-ffvc1760-2-i'
+INFO: [HLS 200-10] Adding design file '/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/conv_2d_large_stream_norm_nobias_pool.cpp' to the project
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 4ns.
+INFO: [SCHED 204-61] Option 'relax_ii_for_timing' is enabled, will increase II to preserve clock frequency constraints.
+INFO: [HLS 200-10] Analyzing design file '/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/conv_2d_large_stream_norm_nobias_pool.cpp' ... 
+ERROR: [HLS 200-70] Compilation errors found: In file included from /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/conv_2d_large_stream_norm_nobias_pool.cpp:1:
+In file included from /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/conv_2d_large_stream_norm_nobias_pool.cpp:5:
+/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../../kernel_headers/_conv_2d_large_stream_norm_nobias_pool.hpp:32:98: error: expected ',' or '>' in template-parameter-list
+template <class input_t, class layer5_t, class layer2_t, typename config2, typename config5, int 3, int 64, int 64>
+                                                                                                 ^
+/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../../kernel_headers/_conv_2d_large_stream_norm_nobias_pool.hpp:32:99: error: expected unqualified-id
+template <class input_t, class layer5_t, class layer2_t, typename config2, typename config5, int 3, int 64, int 64>
+                                                                                                  ^
+In file included from /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/conv_2d_large_stream_norm_nobias_pool.cpp:1:
+/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/conv_2d_large_stream_norm_nobias_pool.cpp:25:2: error: use of undeclared identifier '_conv_2d_large_stream_norm_nobias_pool'; did you mean 'conv_2d_large_stream_norm_nobias_pool'?
+ _conv_2d_large_stream_norm_nobias_pool<input_t, layer5_t, layer2_t, config2, CONVIG_POOL, 3, 64, 64> (input, output, w2, s3, b3);
+ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ conv_2d_large_stream_norm_nobias_pool
+/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/conv_2d_large_stream_norm_nobias_pool.cpp:14:6: note: 'conv_2d_large_stream_norm_nobias_pool' declared here
+void conv_2d_large_stream_norm_nobias_pool (
+     ^
+/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/conv_2d_large_stream_norm_nobias_pool.cpp:25:41: error: unexpected type name 'input_t': expected expression
+ _conv_2d_large_stream_norm_nobias_pool<input_t, layer5_t, layer2_t, config2, CONVIG_POOL, 3, 64, 64> (input, output, w2, s3, b3);
+                                        ^
+/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/conv_2d_large_stream_norm_nobias_pool.cpp:25:50: error: unexpected type name 'layer5_t': expected expression
+ _conv_2d_large_stream_norm_nobias_pool<input_t, layer5_t, layer2_t, config2, CONVIG_POOL, 3, 64, 64> (input, output, w2, s3, b3);
+                                                 ^
+/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/conv_2d_large_stream_norm_nobias_pool.cpp:25:60: error: unexpected type name 'layer2_t': expected expression
+ _conv_2d_large_stream_norm_nobias_pool<input_t, layer5_t, layer2_t, config2, CONVIG_POOL, 3, 64, 64> (input, output, w2, s3, b3);
+                                                           ^
+/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/conv_2d_large_stream_norm_nobias_pool.cpp:25:70: error: 'config2' does not refer to a value
+ _conv_2d_large_stream_norm_nobias_pool<input_t, layer5_t, layer2_t, config2, CONVIG_POOL, 3, 64, 64> (input, output, w2, s3, b3);
+                                                                     ^
+/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/parameters_full.h:456:8: note: declared here
+struct config2 : nnet::conv2d_config {
+       ^
+In file included from /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/conv_2d_large_stream_norm_nobias_pool.cpp:1:
+/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/conv_2d_large_stream_norm_nobias_pool.cpp:25:79: error: use of undeclared identifier 'CONVIG_POOL'
+ _conv_2d_large_stream_norm_nobias_pool<input_t, layer5_t, layer2_t, config2, CONVIG_POOL, 3, 64, 64> (input, output, w2, s3, b3);
+                                                                              ^
+/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/conv_2d_large_stream_norm_nobias_pool.cpp:25:104: warning: expression result unused [-Wunused-value]
+ _conv_2d_large_stream_norm_nobias_pool<input_t, layer5_t, layer2_t, config2, CONVIG_POOL, 3, 64, 64> (input, output, w2, s3, b3);
+                                                                                                       ^~~~~
+/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/layer2/../srcs/conv_2d_large_stream_norm_nobias_pool.cpp:25:119: error: use of undeclared identifier 'w2'
+ _conv_2d_large_stream_norm_nobias_pool<input_t, layer5_t, layer2_t, config2, CONVIG_POOL, 3, 64, 64> (input, output, w2, s3, b3);
+                                                                                                                      ^
+1 warning and 9 errors generated.
+Failed during preprocessing.
+    while executing
+"source ../common/build.tcl"
+    (file "./synth.tcl" line 8)
+    invoked from within
+"source ./synth.tcl"
+    invoked from within
+"hls::main ./synth.tcl layer2 ../../../../../../hls4ml/example-models/resnet50-hls-full/firmware ../../../../galapagos"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel 1 hls::main {*}$args"
+    (procedure "hls_proc" line 5)
+    invoked from within
+"hls_proc $argv"
+INFO: [Common 17-206] Exiting vivado_hls at Wed May  6 22:21:42 2020...
+Makefile:11: recipe for target 'all' failed

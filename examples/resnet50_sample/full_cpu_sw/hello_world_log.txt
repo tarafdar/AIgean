@@ -1,0 +1,18 @@
+[2020-05-09 17:05:04.028] [basic_logger] [info] Created Router Node with Local Address:10.1.2.155, 2 local nodes
+[2020-05-09 17:05:04.028] [basic_logger] [info] Making Galapagos Interface:
+[2020-05-09 17:05:04.028] [basic_logger] [info] Making Galapagos Interface:
+[2020-05-09 17:05:04.028] [basic_logger] [info] Created Kernel:0
+[2020-05-09 17:05:04.028] [basic_logger] [info] Making Galapagos Interface:
+[2020-05-09 17:05:04.028] [basic_logger] [info] Making Galapagos Interface:
+[2020-05-09 17:05:04.028] [basic_logger] [info] Created Kernel:1
+[2020-05-09 17:05:04.028] [basic_logger] [info] Started Kernel:0
+[2020-05-09 17:05:04.028] [basic_logger] [info] Started Kernel:1
+[2020-05-09 17:05:04.028] [basic_logger] [info] Starting Router Node with Local Address:10.1.2.155
+[2020-05-09 17:05:04.028] [basic_logger] [info] New Flit Write:kernel_0_m_axis
+[2020-05-09 17:05:04.028] [basic_logger] [info] Interface:kernel_0_m_axis write last flit, adding to list, with dest:1, with size:64, packets size:1
+[2020-05-09 17:05:04.031] [basic_logger] [info] New Flit Write:kernel_1_m_axis
+[2020-05-09 17:05:04.031] [basic_logger] [info] Interface:kernel_1_m_axis write flit data:2a2a2a2a2a2a2aa1
+[2020-05-09 17:05:04.032] [basic_logger] [info] Interface:kernel_1_m_axis write flit data:2a2a2a2a2a2a2a2a
+[2020-05-09 17:05:04.032] [basic_logger] [info] Interface:kernel_1_m_axis write flit data:2a2a2a2a2a2a2a2a
+[2020-05-09 17:05:04.032] [basic_logger] [info] Interface:kernel_1_m_axis write flit data:2a2a2a2a2a2a2a2a
+[2020-05-09 17:05:04.032] [basic_logger] [info] Interface:kernel_1_m_axis write last flit, adding to list, with dest:1, with size:320, packets size:1

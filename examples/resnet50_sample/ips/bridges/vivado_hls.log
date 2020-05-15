@@ -1,0 +1,124 @@
+
+****** Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2019.1.3 (64-bit)
+  **** SW Build 2644227 on Wed Sep  4 09:44:18 MDT 2019
+  **** IP Build 2633630 on Wed Sep  4 12:30:14 MDT 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source /opt/Xilinx/Vivado/2019.1/scripts/vivado_hls/hls.tcl -notrace
+INFO: [HLS 200-10] Running '/opt/Xilinx/Vivado/2019.1/bin/unwrapped/lnx64.o/vivado_hls'
+INFO: [HLS 200-10] For user 'tarafdar' on host 'localhost' (Linux_x86_64 version 4.4.0-159-generic) on Wed May 13 20:53:25 UTC 2020
+INFO: [HLS 200-10] On os Ubuntu 16.04.6 LTS
+INFO: [HLS 200-10] In directory '/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/bridges'
+Sourcing Tcl script 'synth.tcl'
+INFO: [HLS 200-10] Creating and opening project '/home/tarafdar/workDir/reproducability/galapagos/userIP/hls_projects/hls4ml_galapagos_input_bridge_3'.
+INFO: [HLS 200-10] Creating and opening solution '/home/tarafdar/workDir/reproducability/galapagos/userIP/hls_projects/hls4ml_galapagos_input_bridge_3/solution1'.
+INFO: [HLS 200-10] Setting target device to 'xczu19eg-ffvc1760-2-i'
+INFO: [HLS 200-10] Adding design file '/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/bridges/../srcs/galapagos_resnet_bridge.cpp' to the project
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 3.333ns.
+INFO: [SCHED 204-61] Option 'relax_ii_for_timing' is enabled, will increase II to preserve clock frequency constraints.
+INFO: [HLS 200-10] Analyzing design file '/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/bridges/../srcs/galapagos_resnet_bridge.cpp' ... 
+INFO: [HLS 200-111] Finished Linking Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 842.625 ; gain = 100.164 ; free physical = 30959 ; free virtual = 88236
+INFO: [HLS 200-111] Finished Checking Pragmas Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 842.625 ; gain = 100.164 ; free physical = 30959 ; free virtual = 88236
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 842.625 ; gain = 100.164 ; free physical = 30948 ; free virtual = 88227
+INFO: [HLS 200-10] Checking synthesizability ...
+WARNING: [SYNCHK 200-23] /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/bridges/../../kernel_headers/_galapagos_resnet_bridge.hpp:24: variable-indexed range selection may cause suboptimal QoR.
+INFO: [SYNCHK 200-10] 0 error(s), 1 warning(s).
+INFO: [HLS 200-111] Finished Checking Synthesizability Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 842.625 ; gain = 100.164 ; free physical = 30942 ; free virtual = 88221
+INFO: [XFORM 203-102] Automatically partitioning streamed array 'input.V.data.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/bridges/../srcs/galapagos_resnet_bridge.cpp:6) .
+INFO: [XFORM 203-102] Automatically partitioning streamed array 'input.V.id.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/bridges/../srcs/galapagos_resnet_bridge.cpp:6) .
+INFO: [XFORM 203-101] Partitioning array 'input.V.data.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/bridges/../srcs/galapagos_resnet_bridge.cpp:6) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'input.V.id.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/bridges/../srcs/galapagos_resnet_bridge.cpp:6) in dimension 1 completely.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/bridges/../../kernel_headers/_galapagos_resnet_bridge.hpp:19:28) to (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/bridges/../../kernel_headers/_galapagos_resnet_bridge.hpp:25:9) in function '_hls4ml_galapagos_input_bridge_write_words_3'... converting 3 basic blocks.
+INFO: [HLS 200-111] Finished Pre-synthesis Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 842.625 ; gain = 100.164 ; free physical = 30907 ; free virtual = 88187
+WARNING: [XFORM 203-631] Renaming function '_hls4ml_galapagos_input_bridge_write_words_3' to '_hls4ml_galapagos_in' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/bridges/../../kernel_headers/_galapagos_resnet_bridge.hpp:19:23)
+WARNING: [XFORM 203-631] Renaming function '_hls4ml_galapagos_input_bridge<3>' to '_hls4ml_galapagos_in.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50_sample/ips/bridges/../../kernel_headers/_galapagos_resnet_bridge.hpp:53:28)
+INFO: [HLS 200-111] Finished Architecture Synthesis Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 906.625 ; gain = 164.164 ; free physical = 30884 ; free virtual = 88165
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'hls4ml_galapagos_input_bridge_3' ...
+WARNING: [SYN 201-103] Legalizing function name '_hls4ml_galapagos_in' to 'p_hls4ml_galapagos_in'.
+WARNING: [SYN 201-103] Legalizing function name '_hls4ml_galapagos_in.1' to 'p_hls4ml_galapagos_in_1'.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_hls4ml_galapagos_in' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'Loop 1'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 2.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 27.96 seconds; current allocated memory: 128.912 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.06 seconds; current allocated memory: 129.193 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_hls4ml_galapagos_in_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.19 seconds; current allocated memory: 129.286 MB.
+INFO: [HLS 200-434] Only 0 loops out of a total 1 loops have been pipelined in this design.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.05 seconds; current allocated memory: 129.549 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'hls4ml_galapagos_input_bridge_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.06 seconds; current allocated memory: 129.663 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.08 seconds; current allocated memory: 129.772 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_hls4ml_galapagos_in' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_hls4ml_galapagos_in'.
+INFO: [HLS 200-111]  Elapsed time: 0.06 seconds; current allocated memory: 130.187 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_hls4ml_galapagos_in_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_hls4ml_galapagos_in_1'.
+INFO: [HLS 200-111]  Elapsed time: 0.23 seconds; current allocated memory: 131.458 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'hls4ml_galapagos_input_bridge_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls4ml_galapagos_input_bridge_3/bridge_in_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls4ml_galapagos_input_bridge_3/bridge_in_V_dest_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls4ml_galapagos_input_bridge_3/bridge_in_V_last_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls4ml_galapagos_input_bridge_3/bridge_in_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls4ml_galapagos_input_bridge_3/bridge_in_V_user_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls4ml_galapagos_input_bridge_3/bridge_in_V_keep_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls4ml_galapagos_input_bridge_3/input_0_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls4ml_galapagos_input_bridge_3/input_1_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls4ml_galapagos_input_bridge_3/input_2_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls4ml_galapagos_input_bridge_3/input_0_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls4ml_galapagos_input_bridge_3/input_1_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'hls4ml_galapagos_input_bridge_3/input_2_V_id_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on function 'hls4ml_galapagos_input_bridge_3' to 'ap_ctrl_none'.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'hls4ml_galapagos_input_bridge_3'.
+INFO: [HLS 200-111]  Elapsed time: 0.17 seconds; current allocated memory: 132.919 MB.
+INFO: [HLS 200-111] Finished generating all RTL models Time (s): cpu = 00:00:28 ; elapsed = 00:00:30 . Memory (MB): peak = 906.625 ; gain = 164.164 ; free physical = 30884 ; free virtual = 88167
+INFO: [VHDL 208-304] Generating VHDL RTL for hls4ml_galapagos_input_bridge_3.
+INFO: [VLOG 209-307] Generating Verilog RTL for hls4ml_galapagos_input_bridge_3.
+INFO: [IMPL 213-8] Exporting RTL as a Vivado IP.
+
+****** Vivado v2019.1.3 (64-bit)
+  **** SW Build 2644227 on Wed Sep  4 09:44:18 MDT 2019
+  **** IP Build 2633630 on Wed Sep  4 12:30:14 MDT 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source run_ippack.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2019.1/data/ip'.
+INFO: [Common 17-206] Exiting Vivado at Wed May 13 20:54:06 2020...
+INFO: [HLS 200-112] Total elapsed time: 41.73 seconds; peak allocated memory: 132.919 MB.
+INFO: [Common 17-206] Exiting vivado_hls at Wed May 13 20:54:06 2020...
