@@ -2678,7 +2678,6 @@ struct config150_relu : nnet::activ_config {
 
 struct config150_mult : nnet::dense_config {
     static const unsigned n_in = 1024;
-    static const unsigned n_out = 2048;
 #ifdef TINY
     static const unsigned n_out = 2048;
 #else
