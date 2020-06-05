@@ -1,8 +1,8 @@
-set arg_0 "-I . -DN_INPUT=N_FILT_46 -DN_CONV=N_FILT_50" 
+set arg_0 "-I . -DN_INPUT=N_FILT_44 -DN_OUTPUT=N_FILT_50" 
 set arg_1 "-DCONFIG=config50" 
-set arg_2 "-DINPUT_T=layer46_t -DCONV_LAYER_T=layer50_t"
-set arg_3 "-DWEIGHTS=w50 -DSCALES=s51 -DBIASES=b51"
+set arg_2 "-DINPUT_T=layer181_t -DLAYER_T=layer52_t"
+set arg_3 "-DWEIGHTS=w50  -DBIASES=b50"
 set args "$arg_0 $arg_1 $arg_2 $arg_3"
-set layer_type split_one_conv_2d_large_stream_norm_nobias
+set layer_type conv_2d_large_cl_1x1
 
 source ../common/build.tcl

@@ -1,0 +1,62 @@
+In file included from kern.cpp:15:0:
+srcs/conv_2d_large_cl.hpp: In function ‘void conv_2d_large_cl(hls::stream<in_T>*, hls::stream<out_T>*, typename CONFIG::weight_t*, typename CONFIG::bias_t*)’:
+srcs/conv_2d_large_cl.hpp:17:5: error: ‘_conv_2d_large_stream_norm_nobias’ was not declared in this scope
+     _conv_2d_large_stream_norm_nobias <INPUT_T, LAYER_T, CONFIG, N_INPUT, N_OUTPUT> (input, output, weights, scale, sbiases);
+     ^
+srcs/conv_2d_large_cl.hpp:17:47: error: expected primary-expression before ‘,’ token
+     _conv_2d_large_stream_norm_nobias <INPUT_T, LAYER_T, CONFIG, N_INPUT, N_OUTPUT> (input, output, weights, scale, sbiases);
+                                               ^
+srcs/conv_2d_large_cl.hpp:17:56: error: expected primary-expression before ‘,’ token
+     _conv_2d_large_stream_norm_nobias <INPUT_T, LAYER_T, CONFIG, N_INPUT, N_OUTPUT> (input, output, weights, scale, sbiases);
+                                                        ^
+srcs/conv_2d_large_cl.hpp:17:64: error: expected primary-expression before ‘,’ token
+     _conv_2d_large_stream_norm_nobias <INPUT_T, LAYER_T, CONFIG, N_INPUT, N_OUTPUT> (input, output, weights, scale, sbiases);
+                                                                ^
+srcs/conv_2d_large_cl.hpp:17:110: error: ‘scale’ was not declared in this scope
+     _conv_2d_large_stream_norm_nobias <INPUT_T, LAYER_T, CONFIG, N_INPUT, N_OUTPUT> (input, output, weights, scale, sbiases);
+                                                                                                              ^
+srcs/conv_2d_large_cl.hpp:17:117: error: ‘sbiases’ was not declared in this scope
+     _conv_2d_large_stream_norm_nobias <INPUT_T, LAYER_T, CONFIG, N_INPUT, N_OUTPUT> (input, output, weights, scale, sbiases);
+                                                                                                                     ^
+kern.cpp: In function ‘void kern_send(short int, galapagos_interface*, galapagos_interface*)’:
+kern.cpp:139:64: error: no matching function for call to ‘hls4ml_galapagos_input_bridge(galapagos_interface*&, hls::stream<resnet50_packet> [2048])’
+             hls4ml_galapagos_input_bridge <N_FILT_14> (in, test);
+                                                                ^
+In file included from kern.cpp:14:0:
+srcs/galapagos_resnet_bridge.hpp:8:6: note: candidate: template<int width> void hls4ml_galapagos_input_bridge(galapagos_interface*, hls::stream<ap_uint<8> >*)
+ void hls4ml_galapagos_input_bridge(galapagos_interface * bridge_in,
+      ^
+srcs/galapagos_resnet_bridge.hpp:8:6: note:   template argument deduction/substitution failed:
+kern.cpp:139:64: note:   cannot convert ‘test’ (type ‘hls::stream<resnet50_packet> [2048]’) to type ‘hls::stream<ap_uint<8> >*’
+             hls4ml_galapagos_input_bridge <N_FILT_14> (in, test);
+                                                                ^
+kern.cpp: In function ‘void print_buffer(std::__cxx11::string, hls::stream<ap_uint<8> >*)’:
+kern.cpp:171:27: error: ‘packet’ was not declared in this scope
+             buff[k].write(packet);
+                           ^
+kern.cpp: In function ‘void kern_aigean(short int, galapagos_interface*, galapagos_interface*)’:
+kern.cpp:227:76: error: ‘N_FILT_1’ was not declared in this scope
+                 conv_2d_large_cl <input_t, layer4_t, config2, N_INPUT_3_1, N_FILT_1>
+                                                                            ^
+kern.cpp:228:47: error: no matching function for call to ‘conv_2d_large_cl(hls::stream<ap_uint<8> > [3], hls::stream<ap_fixed<8, 6> > [64], model_default_t [4704], bias2_t [64])’
+                     (input, layer4_out, w2, b2);
+                                               ^
+In file included from kern.cpp:15:0:
+srcs/conv_2d_large_cl.hpp:9:6: note: candidate: template<class INPUT_T, class LAYER_T, class CONFIG, int N_INPUT, int N_OUTPUT> void conv_2d_large_cl(hls::stream<in_T>*, hls::stream<out_T>*, typename CONFIG::weight_t*, typename CONFIG::bias_t*)
+ void conv_2d_large_cl ( 
+      ^
+srcs/conv_2d_large_cl.hpp:9:6: note:   template argument deduction/substitution failed:
+kern.cpp:228:47: error: template argument 5 is invalid
+                     (input, layer4_out, w2, b2);
+                                               ^
+kern.cpp:230:85: error: no matching function for call to ‘drain_print_buffer(std::__cxx11::string, hls::stream<ap_fixed<8, 6> > [64])’
+                 drain_print_buffer<N_FILT_2> (std::string("LAYER_2_OUT"), layer4_out);      
+                                                                                     ^
+kern.cpp:178:6: note: candidate: template<int size> void drain_print_buffer(std::__cxx11::string, hls::stream<ap_uint<8> >*)
+ void drain_print_buffer(std::string buffer_name, hls::stream<ap_uint<8> > buff[size]){
+      ^
+kern.cpp:178:6: note:   template argument deduction/substitution failed:
+kern.cpp:230:85: note:   cannot convert ‘layer4_out’ (type ‘hls::stream<ap_fixed<8, 6> > [64]’) to type ‘hls::stream<ap_uint<8> >*’
+                 drain_print_buffer<N_FILT_2> (std::string("LAYER_2_OUT"), layer4_out);      
+                                                                                     ^
+make: *** [hello_world.exe] Error 1

@@ -1,0 +1,363 @@
+
+****** Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2019.1.3 (64-bit)
+  **** SW Build 2644227 on Wed Sep  4 09:44:18 MDT 2019
+  **** IP Build 2633630 on Wed Sep  4 12:30:14 MDT 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source /opt/Xilinx/Vivado/2019.1/scripts/vivado_hls/hls.tcl -notrace
+INFO: [HLS 200-10] Running '/opt/Xilinx/Vivado/2019.1/bin/unwrapped/lnx64.o/vivado_hls'
+INFO: [HLS 200-10] For user 'tarafdar' on host 'localhost' (Linux_x86_64 version 4.4.0-159-generic) on Fri Jun 05 15:38:07 UTC 2020
+INFO: [HLS 200-10] On os Ubuntu 16.04.6 LTS
+INFO: [HLS 200-10] In directory '/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2'
+Sourcing Tcl script './synth.tcl'
+INFO: [HLS 200-10] Creating and opening project '/home/tarafdar/workDir/reproducability/galapagos/userIP/hls_projects/resnet_layer2'.
+INFO: [HLS 200-10] Creating and opening solution '/home/tarafdar/workDir/reproducability/galapagos/userIP/hls_projects/resnet_layer2/solution1'.
+WARNING: [HLS 200-483] The 'config_rtl -prefix' command is deprecated and will be removed in a future release. Use 'config_rtl -module_prefix' as its replacement.
+INFO: [HLS 200-10] Setting target device to 'xczu19eg-ffvc1760-2-i'
+INFO: [HLS 200-10] Adding design file '/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../srcs/conv_2d_large_cl.cpp' to the project
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 4ns.
+INFO: [SCHED 204-61] Option 'relax_ii_for_timing' is enabled, will increase II to preserve clock frequency constraints.
+INFO: [HLS 200-10] Analyzing design file '/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../srcs/conv_2d_large_cl.cpp' ... 
+WARNING: [HLS 214-114] Since the only kind of statements allowed in a dataflow region are variable declarations and function calls, the compiler may not be able to correctly handle the region: /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense.h:140:9
+WARNING: [HLS 214-104] Only for-loops and functions support the dataflow: /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense.h:152:9
+WARNING: [HLS 214-104] Only for-loops and functions support the dataflow: /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_batchnorm.h:76:9
+WARNING: [HLS 214-111] Static scalars and arrays declared inside a dataflow region will be treated like local variables: /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:474:24
+WARNING: [HLS 214-114] Since the only kind of statements allowed in a dataflow region are variable declarations and function calls, the compiler may not be able to correctly handle the region: /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../kernel_headers/_conv_2d_large_cl.hpp:40:2
+WARNING: [HLS 214-113] Either use an argument of the function or declare the variable inside the dataflow loop body: /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../srcs/conv_2d_large_cl.cpp:19:71
+WARNING: [HLS 200-471] Dataflow form checks found 6 issue(s) in file /home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../srcs/conv_2d_large_cl.cpp
+INFO: [HLS 200-111] Finished Linking Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 826.637 ; gain = 128.000 ; free physical = 26518 ; free virtual = 89243
+INFO: [HLS 200-111] Finished Checking Pragmas Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 826.637 ; gain = 128.000 ; free physical = 26513 ; free virtual = 89237
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 890.637 ; gain = 192.000 ; free physical = 26669 ; free virtual = 89396
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [XFORM 203-602] Inlining function 'nnet::cast<ap_uint<8>, ap_uint<8>, config2_mult>' into 'nnet::dense_large_rf_leq_nin<ap_uint<8>, ap_uint<8>, config2_mult>' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense_large.h:100) automatically.
+INFO: [XFORM 203-602] Inlining function 'nnet::dense_large<ap_uint<8>, ap_uint<8>, config2_mult>' into 'nnet::conv_2d_large_cl<ap_uint<8>, ap_uint<8>, config2>' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:327) automatically.
+INFO: [XFORM 203-602] Inlining function 'nnet::relu<ap_uint<8>, ap_uint<8>, config2_relu>' into 'nnet::conv_2d_large_cl<ap_uint<8>, ap_uint<8>, config2>' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:328) automatically.
+INFO: [HLS 200-111] Finished Checking Synthesizability Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 890.637 ; gain = 192.000 ; free physical = 26588 ; free virtual = 89315
+INFO: [XFORM 203-502] Unrolling all loops for pipelining in function 'nnet::fill_image<ap_uint<8>, ap_uint<8>, config2>' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:123).
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'ReuseLoop' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense_large.h:64) in function 'nnet::dense_large_rf_leq_nin<ap_uint<8>, ap_uint<8>, config2_mult>' for pipelining.
+INFO: [XFORM 203-502] Unrolling all loops for pipelining in function 'nnet::cnnshift<ap_uint<8>, ap_uint<8>, config2>' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:235).
+INFO: [XFORM 203-502] Unrolling all loops for pipelining in function 'nnet::cnnshiftzero<ap_uint<8>, ap_uint<8>, config2>' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:262).
+INFO: [XFORM 203-502] Unrolling all loops for pipelining in function 'nnet::shift_right_small<ap_uint<8>, ap_uint<8>, config2>' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:100).
+WARNING: [XFORM 203-505] Ignored pipeline directive for loop 'Loop-1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:105) because its parent loop or function is pipelined.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:127) in function 'nnet::fill_image<ap_uint<8>, ap_uint<8>, config2>' completely with a factor of 65.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_activation.h:84) in function 'nnet::relu<ap_uint<8>, ap_uint<8>, config2_relu>' completely with a factor of 64.
+INFO: [HLS 200-489] Unrolling loop 'InitAccum' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense_large.h:59) in function 'nnet::dense_large_rf_leq_nin<ap_uint<8>, ap_uint<8>, config2_mult>' completely with a factor of 64.
+INFO: [HLS 200-489] Unrolling loop 'MultLoop' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense_large.h:74) in function 'nnet::dense_large_rf_leq_nin<ap_uint<8>, ap_uint<8>, config2_mult>' completely with a factor of 32.
+INFO: [HLS 200-489] Unrolling loop 'Loop-2.2' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense_large.h:83) in function 'nnet::dense_large_rf_leq_nin<ap_uint<8>, ap_uint<8>, config2_mult>' completely with a factor of 32.
+INFO: [HLS 200-489] Unrolling loop 'Result' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense_large.h:98) in function 'nnet::dense_large_rf_leq_nin<ap_uint<8>, ap_uint<8>, config2_mult>' completely with a factor of 64.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:246) in function 'nnet::cnnshift<ap_uint<8>, ap_uint<8>, config2>' completely with a factor of 3.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:250) in function 'nnet::cnnshift<ap_uint<8>, ap_uint<8>, config2>' completely with a factor of 6.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:272) in function 'nnet::cnnshiftzero<ap_uint<8>, ap_uint<8>, config2>' completely with a factor of 3.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:276) in function 'nnet::cnnshiftzero<ap_uint<8>, ap_uint<8>, config2>' completely with a factor of 6.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:105) in function 'nnet::shift_right_small<ap_uint<8>, ap_uint<8>, config2>' completely with a factor of 6.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:107) in function 'nnet::shift_right_small<ap_uint<8>, ap_uint<8>, config2>' completely with a factor of 7.
+INFO: [HLS 200-489] Unrolling loop 'Loop-1.1.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:108) in function 'nnet::shift_right_small<ap_uint<8>, ap_uint<8>, config2>' completely with a factor of 3.
+INFO: [HLS 200-489] Unrolling loop 'Loop-2' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:114) in function 'nnet::shift_right_small<ap_uint<8>, ap_uint<8>, config2>' completely with a factor of 7.
+INFO: [HLS 200-489] Unrolling loop 'Loop-2.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:116) in function 'nnet::shift_right_small<ap_uint<8>, ap_uint<8>, config2>' completely with a factor of 3.
+INFO: [XFORM 203-131] Reshaping array 'layer_in.V'  in dimension 1 completely.
+INFO: [XFORM 203-131] Reshaping array 'layer_reluout.V'  in dimension 1 completely.
+INFO: [XFORM 203-131] Reshaping array 'layer_out.V'  in dimension 1 completely.
+INFO: [XFORM 203-131] Reshaping array 'w2.V'  in dimension 1 with a block factor of 32.
+INFO: [XFORM 203-131] Reshaping array 'b2.V'  in dimension 1 completely.
+INFO: [XFORM 203-131] Reshaping array 'tmpmult.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense_large.h:71) in dimension 1 completely.
+INFO: [XFORM 203-131] Reshaping array 'tmpinput.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:243) in dimension 1 completely.
+INFO: [XFORM 203-131] Reshaping array 'tmpinput.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:269) in dimension 1 completely.
+INFO: [XFORM 203-131] Reshaping array 'tmpinput.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:243) in dimension 2 completely.
+INFO: [XFORM 203-131] Reshaping array 'tmpinput.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:269) in dimension 2 completely.
+INFO: [XFORM 203-102] Automatically partitioning shift register array 'layer_in_row.Array.V' .
+INFO: [XFORM 203-102] Automatically partitioning streamed array 'input.V.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../srcs/conv_2d_large_cl.cpp:8) .
+INFO: [XFORM 203-102] Automatically partitioning streamed array 'output.V.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../srcs/conv_2d_large_cl.cpp:9) .
+INFO: [XFORM 203-101] Partitioning array 'acc.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense_large.h:55) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'layer_in_row.Array.V' in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'input.V.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../srcs/conv_2d_large_cl.cpp:8) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'output.V.V' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../srcs/conv_2d_large_cl.cpp:9) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'layer_in_row.Array.V' in dimension 2 completely.
+INFO: [XFORM 203-602] Inlining function 'nnet::cast<ap_uint<8>, ap_uint<8>, config2_mult>' into 'nnet::dense_large_rf_leq_nin<ap_uint<8>, ap_uint<8>, config2_mult>.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense_large.h:100) automatically.
+INFO: [XFORM 203-602] Inlining function 'nnet::dense_large<ap_uint<8>, ap_uint<8>, config2_mult>' into 'nnet::conv_2d_large_cl<ap_uint<8>, ap_uint<8>, config2>' automatically.
+INFO: [XFORM 203-622] Instantiating function 'nnet::dense_large_rf_leq_nin<ap_uint<8>, ap_uint<8>, config2_mult>.1'(/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense_large.h:61:37) to 'nnet::dense_large_rf_leq_nin<ap_uint<8>, ap_uint<8>, config2_mult>.1.0' by setting 'weights.V' to 'w2.V'.
+INFO: [XFORM 203-622] Instantiating function 'nnet::dense_large_rf_leq_nin<ap_uint<8>, ap_uint<8>, config2_mult>.1.0'(/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense_large.h:61:37) to 'nnet::dense_large_rf_leq_nin<ap_uint<8>, ap_uint<8>, config2_mult>.1.0.0' by setting 'biases.V' to 'b2.V'.
+INFO: [XFORM 203-712] Applying dataflow to function '_conv_2d_large_cl<ap_uint<8>, ap_uint<8>, config2, 4, 65>', detected/extracted 1 process function(s): 
+	 '_conv_2d_large_cl<ap_uint<8>, ap_uint<8>, config2, 4, 65>_Block__proc'.
+INFO: [XFORM 203-712] Applying dataflow to function 'conv_2d_large_cl', detected/extracted 1 process function(s): 
+	 '_conv_2d_large_cl<ap_uint<8>, ap_uint<8>, config2, 4, 65>'.
+INFO: [XFORM 203-602] Inlining function 'nnet::shift_right_small<ap_uint<8>, ap_uint<8>, config2>.1' into 'nnet::cnnshiftzero<ap_uint<8>, ap_uint<8>, config2>' automatically.
+INFO: [XFORM 203-602] Inlining function 'nnet::shift_right_small<ap_uint<8>, ap_uint<8>, config2>.1' into 'nnet::cnnshift<ap_uint<8>, ap_uint<8>, config2>' automatically.
+INFO: [XFORM 203-602] Inlining function 'nnet::relu<ap_uint<8>, ap_uint<8>, config2_relu>' into 'nnet::conv_2d_large_cl<ap_uint<8>, ap_uint<8>, config2>' automatically.
+INFO: [HLS 200-111] Finished Pre-synthesis Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 890.637 ; gain = 192.000 ; free physical = 26444 ; free virtual = 89175
+WARNING: [XFORM 203-631] Renaming function 'nnet::product<ap_uint<8>, ap_uint<16>, ap_uint<27> >' to 'product' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense.h:90:12)
+WARNING: [XFORM 203-631] Renaming function 'nnet::fill_image<ap_uint<8>, ap_uint<8>, config2>' to 'fill_image' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:126:1)
+WARNING: [XFORM 203-631] Renaming function 'nnet::dense_large_rf_leq_nin<ap_uint<8>, ap_uint<8>, config2_mult>.1.0.0' to 'dense_large_rf_leq_n' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense_large.h:34:37)
+WARNING: [XFORM 203-631] Renaming function 'nnet::conv_2d_large_cl<ap_uint<8>, ap_uint<8>, config2>' to 'conv_2d_large_cl.1' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:312:7)
+WARNING: [XFORM 203-631] Renaming function 'nnet::cnnshiftzero<ap_uint<8>, ap_uint<8>, config2>' to 'cnnshiftzero' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:117:1)
+WARNING: [XFORM 203-631] Renaming function 'nnet::cnnshift<ap_uint<8>, ap_uint<8>, config2>' to 'cnnshift' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_conv2d_large.h:117:1)
+WARNING: [XFORM 203-631] Renaming function '_conv_2d_large_cl<ap_uint<8>, ap_uint<8>, config2, 4, 65>_Block__proc' to '_conv_2d_large_cl_Bl' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../kernel_headers/_conv_2d_large_cl.hpp:40:5)
+WARNING: [XFORM 203-631] Renaming function '_conv_2d_large_cl<ap_uint<8>, ap_uint<8>, config2, 4, 65>' to '_conv_2d_large_cl' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../kernel_headers/_conv_2d_large_cl.hpp:17:1)
+INFO: [XFORM 203-531] Rewinding loop 'ReuseLoop' (/home/tarafdar/workDir/reproducability/AIgean/examples/resnet50/ips/layer2/../../../../../hls4ml/example-models/resnet50-hls-full_v2/firmware/nnet_utils/nnet_dense_large.h:64) in function 'dense_large_rf_leq_n'.
+WARNING: [XFORM 203-561] Ignored multiple trip count directives for loop 'ReuseLoop' in function 'dense_large_rf_leq_n'.
+INFO: [HLS 200-111] Finished Architecture Synthesis Time (s): cpu = 00:00:46 ; elapsed = 00:00:47 . Memory (MB): peak = 890.637 ; gain = 192.000 ; free physical = 26548 ; free virtual = 89280
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'conv_2d_large_cl' ...
+WARNING: [SYN 201-103] Legalizing function name 'conv_2d_large_cl.1' to 'conv_2d_large_cl_1'.
+WARNING: [SYN 201-103] Legalizing function name '_conv_2d_large_cl_Bl' to 'p_conv_2d_large_cl_Bl'.
+WARNING: [SYN 201-103] Legalizing function name '_conv_2d_large_cl' to 'p_conv_2d_large_cl'.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'cnnshiftzero' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'cnnshiftzero'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 2.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 47.55 seconds; current allocated memory: 224.284 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.03 seconds; current allocated memory: 224.528 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'cnnshift' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'cnnshift'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 2.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.07 seconds; current allocated memory: 224.703 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.05 seconds; current allocated memory: 225.022 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'product' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'product'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 1.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.07 seconds; current allocated memory: 225.075 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.01 seconds; current allocated memory: 225.132 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'dense_large_rf_leq_n' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'ReuseLoop'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 3.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.33 seconds; current allocated memory: 226.077 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.25 seconds; current allocated memory: 227.640 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'fill_image' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'fill_image'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 1.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.38 seconds; current allocated memory: 228.299 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.17 seconds; current allocated memory: 229.416 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'conv_2d_large_cl_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.17 seconds; current allocated memory: 229.810 MB.
+INFO: [HLS 200-434] Only 0 loops out of a total 3 loops have been pipelined in this design.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.32 seconds; current allocated memory: 230.849 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_conv_2d_large_cl_Bl' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.3 seconds; current allocated memory: 231.146 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.12 seconds; current allocated memory: 231.854 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_conv_2d_large_cl' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.26 seconds; current allocated memory: 232.089 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.11 seconds; current allocated memory: 232.794 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'conv_2d_large_cl' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.26 seconds; current allocated memory: 233.095 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.18 seconds; current allocated memory: 233.889 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'cnnshiftzero' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'cnnshiftzero'.
+INFO: [HLS 200-111]  Elapsed time: 0.32 seconds; current allocated memory: 234.648 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'cnnshift' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'cnnshift'.
+INFO: [HLS 200-111]  Elapsed time: 0.11 seconds; current allocated memory: 236.162 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'product' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'conv_2d_large_cl_mul_mul_8ns_26ns_27_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'product'.
+INFO: [HLS 200-111]  Elapsed time: 0.11 seconds; current allocated memory: 237.228 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'dense_large_rf_leq_n' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'dense_large_rf_leq_n'.
+INFO: [HLS 200-111]  Elapsed time: 0.21 seconds; current allocated memory: 239.869 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'fill_image' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'fill_image'.
+INFO: [HLS 200-111]  Elapsed time: 0.99 seconds; current allocated memory: 246.825 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'conv_2d_large_cl_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Register 'pX' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'pY' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'layer_in_V' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'pPass' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'layer_out_V' is power-on initialization.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'conv_2d_large_cl_1'.
+INFO: [HLS 200-111]  Elapsed time: 0.87 seconds; current allocated memory: 257.964 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_conv_2d_large_cl_Bl' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_conv_2d_large_cl_Bl'.
+INFO: [HLS 200-111]  Elapsed time: 2.1 seconds; current allocated memory: 268.818 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_conv_2d_large_cl' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-633] Setting ap_ctrl_none interface for _conv_2d_large_cl
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_conv_2d_large_cl'.
+INFO: [HLS 200-111]  Elapsed time: 1.61 seconds; current allocated memory: 272.590 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'conv_2d_large_cl' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/input_0_V_V' to 'axis'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/input_1_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/input_2_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/input_3_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_0_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_1_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_2_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_3_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_4_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_5_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_6_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_7_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_8_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_9_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_10_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_11_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_12_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_13_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_14_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_15_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_16_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_17_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_18_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_19_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_20_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_21_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_22_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_23_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_24_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_25_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_26_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_27_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_28_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_29_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_30_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_31_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_32_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_33_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_34_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_35_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_36_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_37_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_38_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_39_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_40_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_41_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_42_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_43_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_44_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_45_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_46_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_47_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_48_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_49_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_50_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_51_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_52_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_53_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_54_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_55_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_56_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_57_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_58_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_59_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_60_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_61_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_62_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_63_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'conv_2d_large_cl/output_64_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on function 'conv_2d_large_cl' to 'ap_ctrl_none'.
+INFO: [HLS 200-633] Setting ap_ctrl_none interface for conv_2d_large_cl
+INFO: [RTGEN 206-100] Finished creating RTL model for 'conv_2d_large_cl'.
+INFO: [HLS 200-111]  Elapsed time: 0.7 seconds; current allocated memory: 274.689 MB.
+INFO: [RTMG 210-279] Implementing memory 'layer2_dense_large_rf_leq_n_w2_V_rom' using auto ROMs.
+INFO: [HLS 200-111] Finished generating all RTL models Time (s): cpu = 00:00:57 ; elapsed = 00:01:01 . Memory (MB): peak = 1018.637 ; gain = 320.000 ; free physical = 26133 ; free virtual = 88937
+INFO: [VHDL 208-304] Generating VHDL RTL for conv_2d_large_cl with prefix layer2_.
+INFO: [VLOG 209-307] Generating Verilog RTL for conv_2d_large_cl with prefix layer2_.
+INFO: [IMPL 213-8] Exporting RTL as a Vivado IP.
+
+****** Vivado v2019.1.3 (64-bit)
+  **** SW Build 2644227 on Wed Sep  4 09:44:18 MDT 2019
+  **** IP Build 2633630 on Wed Sep  4 12:30:14 MDT 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source run_ippack.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2019.1/data/ip'.
+INFO: [Common 17-206] Exiting Vivado at Fri Jun  5 15:39:24 2020...
+INFO: [HLS 200-112] Total elapsed time: 77.19 seconds; peak allocated memory: 274.689 MB.
+INFO: [Common 17-206] Exiting vivado_hls at Fri Jun  5 15:39:24 2020...

@@ -1,7 +1,8 @@
-set arg_0 "-I . -DN_INPUT=N_FILT_14 -DN_CONV=N_FILT_18" 
+set arg_0 "-I . -DN_INPUT=N_FILT_12 -DN_OUTPUT=N_FILT_18" 
 set arg_1 "-DCONFIG=config18" 
-set arg_2 "-DINPUT_T=layer14_t -DCONV_LAYER_T=layer18_t"
-set arg_3 "-DWEIGHTS=w18 -DSCALES=s19 -DBIASES=b19"
+set arg_2 "-DINPUT_T=layer178_t -DLAYER_T=layer20_t"
+set arg_3 "-DWEIGHTS=w18  -DBIASES=b18"
 set args "$arg_0 $arg_1 $arg_2 $arg_3"
+set layer_type conv_2d_large_cl_1x1
 
 source ../common/build.tcl

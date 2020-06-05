@@ -1,0 +1,1282 @@
+{
+    "cluster": {
+        "kernel": [
+            {
+                "#text": "hls4ml_galapagos_input_bridge_3",
+                "aresetn": "ap_rst_n",
+                "clk": "ap_clk",
+                "lib": "hls",
+                "m_axis": [
+                    {
+                        "name": "input_0",
+                        "scope": "local",
+                        "slave": {
+                            "node": 1,
+                            "port": "input_0"
+                        }
+                    },
+                    {
+                        "name": "input_1",
+                        "scope": "local",
+                        "slave": {
+                            "node": 1,
+                            "port": "input_1"
+                        }
+                    },
+                    {
+                        "name": "input_2",
+                        "scope": "local",
+                        "slave": {
+                            "node": 1,
+                            "port": "input_2"
+                        }
+                    }
+                ],
+                "num": 0,
+                "rep": 1,
+                "s_axis": [
+                    {
+                        "name": "bridge_in",
+                        "scope": "global"
+                    }
+                ],
+                "vendor": "xilinx.com"
+            },
+            {
+                "#text": "layer1_send_image",
+                "aresetn": "ap_rst_n",
+                "clk": "ap_clk",
+                "lib": "hls",
+                "m_axis": [
+                    {
+                        "name": "output_0",
+                        "scope": "local",
+                        "slave": {
+                            "node": 2,
+                            "port": "output_0"
+                        }
+                    },
+                    {
+                        "name": "output_1",
+                        "scope": "local",
+                        "slave": {
+                            "node": 2,
+                            "port": "output_1"
+                        }
+                    },
+                    {
+                        "name": "output_2",
+                        "scope": "local",
+                        "slave": {
+                            "node": 2,
+                            "port": "output_2"
+                        }
+                    }
+                ],
+                "num": 1,
+                "rep": 1,
+                "s_axis": [
+                    {
+                        "master": {
+                            "node": 0,
+                            "port": "input_0"
+                        },
+                        "name": "input_0",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 0,
+                            "port": "input_1"
+                        },
+                        "name": "input_1",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 0,
+                            "port": "input_2"
+                        },
+                        "name": "input_2",
+                        "scope": "local"
+                    }
+                ],
+                "vendor": "xilinx.com"
+            },
+            {
+                "#text": "hls4ml_galapagos_output_bridge_3",
+                "aresetn": "ap_rst_n",
+                "clk": "ap_clk",
+                "const": [
+                    {
+                        "name": "dest_V",
+                        "val": 3,
+                        "width": 16
+                    }
+                ],
+                "lib": "hls",
+                "m_axis": [
+                    {
+                        "name": "bridge_output",
+                        "scope": "global"
+                    }
+                ],
+                "num": 2,
+                "rep": 1,
+                "s_axis": [
+                    {
+                        "master": {
+                            "node": 1,
+                            "port": "output_0"
+                        },
+                        "name": "output_0",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 1,
+                            "port": "output_1"
+                        },
+                        "name": "output_1",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 1,
+                            "port": "output_2"
+                        },
+                        "name": "output_2",
+                        "scope": "local"
+                    }
+                ],
+                "vendor": "xilinx.com"
+            },
+            {
+                "#text": "hls4ml_galapagos_input_bridge_3",
+                "aresetn": "ap_rst_n",
+                "clk": "ap_clk",
+                "lib": "hls",
+                "m_axis": [
+                    {
+                        "name": "input_0",
+                        "scope": "local",
+                        "slave": {
+                            "node": 4,
+                            "port": "input_0"
+                        }
+                    },
+                    {
+                        "name": "input_1",
+                        "scope": "local",
+                        "slave": {
+                            "node": 4,
+                            "port": "input_1"
+                        }
+                    },
+                    {
+                        "name": "input_2",
+                        "scope": "local",
+                        "slave": {
+                            "node": 4,
+                            "port": "input_2"
+                        }
+                    }
+                ],
+                "num": 3,
+                "rep": 1,
+                "s_axis": [
+                    {
+                        "name": "bridge_in",
+                        "scope": "global"
+                    }
+                ],
+                "vendor": "xilinx.com"
+            },
+            {
+                "#text": "layer2_conv_2d_large_stream_norm_nobias_pool",
+                "aresetn": "ap_rst_n",
+                "clk": "ap_clk",
+                "lib": "hls",
+                "m_axis": [
+                    {
+                        "name": "output_0",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_0"
+                        }
+                    },
+                    {
+                        "name": "output_1",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_1"
+                        }
+                    },
+                    {
+                        "name": "output_2",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_2"
+                        }
+                    },
+                    {
+                        "name": "output_3",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_3"
+                        }
+                    },
+                    {
+                        "name": "output_4",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_4"
+                        }
+                    },
+                    {
+                        "name": "output_5",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_5"
+                        }
+                    },
+                    {
+                        "name": "output_6",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_6"
+                        }
+                    },
+                    {
+                        "name": "output_7",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_7"
+                        }
+                    },
+                    {
+                        "name": "output_8",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_8"
+                        }
+                    },
+                    {
+                        "name": "output_9",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_9"
+                        }
+                    },
+                    {
+                        "name": "output_10",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_10"
+                        }
+                    },
+                    {
+                        "name": "output_11",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_11"
+                        }
+                    },
+                    {
+                        "name": "output_12",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_12"
+                        }
+                    },
+                    {
+                        "name": "output_13",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_13"
+                        }
+                    },
+                    {
+                        "name": "output_14",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_14"
+                        }
+                    },
+                    {
+                        "name": "output_15",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_15"
+                        }
+                    },
+                    {
+                        "name": "output_16",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_16"
+                        }
+                    },
+                    {
+                        "name": "output_17",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_17"
+                        }
+                    },
+                    {
+                        "name": "output_18",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_18"
+                        }
+                    },
+                    {
+                        "name": "output_19",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_19"
+                        }
+                    },
+                    {
+                        "name": "output_20",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_20"
+                        }
+                    },
+                    {
+                        "name": "output_21",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_21"
+                        }
+                    },
+                    {
+                        "name": "output_22",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_22"
+                        }
+                    },
+                    {
+                        "name": "output_23",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_23"
+                        }
+                    },
+                    {
+                        "name": "output_24",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_24"
+                        }
+                    },
+                    {
+                        "name": "output_25",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_25"
+                        }
+                    },
+                    {
+                        "name": "output_26",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_26"
+                        }
+                    },
+                    {
+                        "name": "output_27",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_27"
+                        }
+                    },
+                    {
+                        "name": "output_28",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_28"
+                        }
+                    },
+                    {
+                        "name": "output_29",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_29"
+                        }
+                    },
+                    {
+                        "name": "output_30",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_30"
+                        }
+                    },
+                    {
+                        "name": "output_31",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_31"
+                        }
+                    },
+                    {
+                        "name": "output_32",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_32"
+                        }
+                    },
+                    {
+                        "name": "output_33",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_33"
+                        }
+                    },
+                    {
+                        "name": "output_34",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_34"
+                        }
+                    },
+                    {
+                        "name": "output_35",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_35"
+                        }
+                    },
+                    {
+                        "name": "output_36",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_36"
+                        }
+                    },
+                    {
+                        "name": "output_37",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_37"
+                        }
+                    },
+                    {
+                        "name": "output_38",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_38"
+                        }
+                    },
+                    {
+                        "name": "output_39",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_39"
+                        }
+                    },
+                    {
+                        "name": "output_40",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_40"
+                        }
+                    },
+                    {
+                        "name": "output_41",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_41"
+                        }
+                    },
+                    {
+                        "name": "output_42",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_42"
+                        }
+                    },
+                    {
+                        "name": "output_43",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_43"
+                        }
+                    },
+                    {
+                        "name": "output_44",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_44"
+                        }
+                    },
+                    {
+                        "name": "output_45",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_45"
+                        }
+                    },
+                    {
+                        "name": "output_46",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_46"
+                        }
+                    },
+                    {
+                        "name": "output_47",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_47"
+                        }
+                    },
+                    {
+                        "name": "output_48",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_48"
+                        }
+                    },
+                    {
+                        "name": "output_49",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_49"
+                        }
+                    },
+                    {
+                        "name": "output_50",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_50"
+                        }
+                    },
+                    {
+                        "name": "output_51",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_51"
+                        }
+                    },
+                    {
+                        "name": "output_52",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_52"
+                        }
+                    },
+                    {
+                        "name": "output_53",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_53"
+                        }
+                    },
+                    {
+                        "name": "output_54",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_54"
+                        }
+                    },
+                    {
+                        "name": "output_55",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_55"
+                        }
+                    },
+                    {
+                        "name": "output_56",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_56"
+                        }
+                    },
+                    {
+                        "name": "output_57",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_57"
+                        }
+                    },
+                    {
+                        "name": "output_58",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_58"
+                        }
+                    },
+                    {
+                        "name": "output_59",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_59"
+                        }
+                    },
+                    {
+                        "name": "output_60",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_60"
+                        }
+                    },
+                    {
+                        "name": "output_61",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_61"
+                        }
+                    },
+                    {
+                        "name": "output_62",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_62"
+                        }
+                    },
+                    {
+                        "name": "output_63",
+                        "scope": "local",
+                        "slave": {
+                            "node": 5,
+                            "port": "output_63"
+                        }
+                    }
+                ],
+                "num": 4,
+                "rep": 1,
+                "s_axis": [
+                    {
+                        "master": {
+                            "node": 3,
+                            "port": "input_0"
+                        },
+                        "name": "input_0",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 3,
+                            "port": "input_1"
+                        },
+                        "name": "input_1",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 3,
+                            "port": "input_2"
+                        },
+                        "name": "input_2",
+                        "scope": "local"
+                    }
+                ],
+                "vendor": "xilinx.com"
+            },
+            {
+                "#text": "hls4ml_galapagos_output_bridge_64",
+                "aresetn": "ap_rst_n",
+                "clk": "ap_clk",
+                "const": [
+                    {
+                        "name": "dest_V",
+                        "val": "100",
+                        "width": 16
+                    }
+                ],
+                "lib": "hls",
+                "m_axis": [
+                    {
+                        "name": "bridge_output",
+                        "scope": "global"
+                    }
+                ],
+                "num": 5,
+                "rep": 1,
+                "s_axis": [
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_0"
+                        },
+                        "name": "output_0",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_1"
+                        },
+                        "name": "output_1",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_2"
+                        },
+                        "name": "output_2",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_3"
+                        },
+                        "name": "output_3",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_4"
+                        },
+                        "name": "output_4",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_5"
+                        },
+                        "name": "output_5",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_6"
+                        },
+                        "name": "output_6",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_7"
+                        },
+                        "name": "output_7",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_8"
+                        },
+                        "name": "output_8",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_9"
+                        },
+                        "name": "output_9",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_10"
+                        },
+                        "name": "output_10",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_11"
+                        },
+                        "name": "output_11",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_12"
+                        },
+                        "name": "output_12",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_13"
+                        },
+                        "name": "output_13",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_14"
+                        },
+                        "name": "output_14",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_15"
+                        },
+                        "name": "output_15",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_16"
+                        },
+                        "name": "output_16",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_17"
+                        },
+                        "name": "output_17",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_18"
+                        },
+                        "name": "output_18",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_19"
+                        },
+                        "name": "output_19",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_20"
+                        },
+                        "name": "output_20",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_21"
+                        },
+                        "name": "output_21",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_22"
+                        },
+                        "name": "output_22",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_23"
+                        },
+                        "name": "output_23",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_24"
+                        },
+                        "name": "output_24",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_25"
+                        },
+                        "name": "output_25",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_26"
+                        },
+                        "name": "output_26",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_27"
+                        },
+                        "name": "output_27",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_28"
+                        },
+                        "name": "output_28",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_29"
+                        },
+                        "name": "output_29",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_30"
+                        },
+                        "name": "output_30",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_31"
+                        },
+                        "name": "output_31",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_32"
+                        },
+                        "name": "output_32",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_33"
+                        },
+                        "name": "output_33",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_34"
+                        },
+                        "name": "output_34",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_35"
+                        },
+                        "name": "output_35",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_36"
+                        },
+                        "name": "output_36",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_37"
+                        },
+                        "name": "output_37",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_38"
+                        },
+                        "name": "output_38",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_39"
+                        },
+                        "name": "output_39",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_40"
+                        },
+                        "name": "output_40",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_41"
+                        },
+                        "name": "output_41",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_42"
+                        },
+                        "name": "output_42",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_43"
+                        },
+                        "name": "output_43",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_44"
+                        },
+                        "name": "output_44",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_45"
+                        },
+                        "name": "output_45",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_46"
+                        },
+                        "name": "output_46",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_47"
+                        },
+                        "name": "output_47",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_48"
+                        },
+                        "name": "output_48",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_49"
+                        },
+                        "name": "output_49",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_50"
+                        },
+                        "name": "output_50",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_51"
+                        },
+                        "name": "output_51",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_52"
+                        },
+                        "name": "output_52",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_53"
+                        },
+                        "name": "output_53",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_54"
+                        },
+                        "name": "output_54",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_55"
+                        },
+                        "name": "output_55",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_56"
+                        },
+                        "name": "output_56",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_57"
+                        },
+                        "name": "output_57",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_58"
+                        },
+                        "name": "output_58",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_59"
+                        },
+                        "name": "output_59",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_60"
+                        },
+                        "name": "output_60",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_61"
+                        },
+                        "name": "output_61",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_62"
+                        },
+                        "name": "output_62",
+                        "scope": "local"
+                    },
+                    {
+                        "master": {
+                            "node": 4,
+                            "port": "output_63"
+                        },
+                        "name": "output_63",
+                        "scope": "local"
+                    }
+                ],
+                "vendor": "xilinx.com"
+            }
+        ]
+    }
+}

@@ -1,8 +1,8 @@
-set arg_0 "-I . -DN_CONV=N_FILT_31 -DN_ADD=N_FILT_24 -DN_CONV_OUT=N_FILT_34 -DN_OUTPUT=N_FILT_34" 
+set arg_0 "-I . -DN_INPUT=N_FILT_31 -DN_OUTPUT=N_FILT_34" 
 set arg_1 "-DCONFIG=config34" 
-set arg_2 "-DCONV_IN_T=layer31_t -DADD_IN_T=layer24_t -DOUTPUT_T=layer34_t"
-set arg_3 "-DWEIGHTS=w34 -DSCALES=s35 -DBIASES=b35"
+set arg_2 "-DINPUT_T=layer33_t -DLAYER_T=layer35_t"
+set arg_3 "-DWEIGHTS=w34  -DBIASES=b34"
 set args "$arg_0 $arg_1 $arg_2 $arg_3"
-set layer_type one_conv_2d_large_stream_norm_nobias_addrelu
+set layer_type conv_2d_large_cl_1x1
 
 source ../common/build.tcl
