@@ -1990,7 +1990,11 @@ struct config102_relu : nnet::activ_config {
 struct config102_mult : nnet::dense_config {
     static const unsigned n_in = 1024;
     static const unsigned n_out = 256;
+#ifdef TINY
+    static const unsigned reuse_factor = 2048;
+#else
     static const unsigned reuse_factor = 512;
+#endif
     typedef ap_uint<8> accum_t;
     typedef bias102_t bias_t;
     typedef model_default_t weight_t;
@@ -2033,7 +2037,11 @@ struct config105_relu : nnet::activ_config {
 struct config105_mult : nnet::dense_config {
     static const unsigned n_in = 2304;
     static const unsigned n_out = 256;
+#ifdef TINY
+    static const unsigned reuse_factor = 2304;
+#else
     static const unsigned reuse_factor = 768;
+#endif
     typedef ap_uint<8> accum_t;
     typedef bias105_t bias_t;
     typedef model_default_t weight_t;
@@ -2076,7 +2084,11 @@ struct config108_relu : nnet::activ_config {
 struct config108_mult : nnet::dense_config {
     static const unsigned n_in = 256;
     static const unsigned n_out = 1024;
+#ifdef TINY
+    static const unsigned reuse_factor = 2048;
+#else
     static const unsigned reuse_factor = 512;
+#endif
     typedef ap_uint<8> accum_t;
     typedef bias108_t bias_t;
     typedef model_default_t weight_t;
