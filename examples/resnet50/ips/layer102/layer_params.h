@@ -1,5 +1,5 @@
-#ifndef LAYER112_PARAMS
-#define LAYER112_PARAMS
+#ifndef LAYER102_PARAMS
+#define LAYER102_PARAMS
 //#include "weights/w171.h"
-#include "weights/b112.h"
+#include "weights/b102.h"
 #endif
