@@ -110,6 +110,9 @@ def logical_kernel_element(kern_name, kern_id, bridge=False):
     if ("wire_slave" in kern):
         kern_elem["wire_slave"] = kern["wire_slave"]
     
+    if("note" in kern):
+        kern_elem["note"] = kern["note"]
+
     return kern_elem
 
 def add_logical_ip(ip):
@@ -131,6 +134,46 @@ def add_ip(ip, node):
     kerns_to_node_map[len(kerns) - 1] = node
     print("adding IP to node " + str(node) +  " kern num is " + str(len(kerns) - 1))
     node_to_kern_map[node].append(len(kerns) - 1)
+
+
+def printFPGAGraphs():
+    
+    #fpga_num = 4
+    for fpga_num in range(0, len(map_dict)):
+    #if fpga_num == 4:
+        _G = networkx.DiGraph()
+
+
+        for kern in kerns:
+            print("kern['inst'] is " + kern['inst'])
+#            print("kern['kernel'] is " + kern['kernel'])
+            print("kerns_rev['inst'] is " + str(kerns_rev[kern['inst']]))
+#            print("kerns_rev['kernel'] is " + str(kerns_rev['kernel']))
+            print("kerns_to_node_map['inst'] is " + str(kerns_to_node_map[kerns_rev[kern['inst']]]))
+            if(kerns_to_node_map[kerns_rev[kern['inst']]] == fpga_num):
+                _G.add_node(kern['inst'] , kern=kern['kernel'])
+
+        for kern in kerns:
+            if kerns_to_node_map[kerns_rev[kern['inst']]] == fpga_num:
+                print("FINAL GRAPH KERN " +  str(kern))
+                print("FINGAL GRAPH KERN OUTPUTS" + str(kern['outputs']))
+                print("FINAL GRAPH KERN NUM OUTPUTS " + str(len(kern['outputs'])))
+                for output in kern['outputs']:
+                    if 'output_inst' in output:
+                        if(kerns_to_node_map[kerns_rev[kern['inst']]] == fpga_num) and (kerns_to_node_map[kerns_rev[output['output_inst']]] == fpga_num):
+                            print("adding edge " + kern['inst'])
+                            _G.add_edge(kern['inst'], output['output_inst'], source_port=output['name'], sink_port=output['output_port'])
+
+
+        print("FPGA " + str(fpga_num) + " graph")
+        print("KERNS_TO_NODE_MAP")
+        print(kerns_to_node_map)
+        print("KERNS_REV")
+        print(kerns_rev)
+        print("GRAPH")
+        print(graph_to_ascii(_G))
+        print("Done graph")
+
 
 
 def createGraph(test=''):
@@ -176,7 +219,9 @@ def createGraph(test=''):
                 #for _input in kerns[kerns_rev[output['output_inst']]]['inputs']:
                 #    print(" TESTING GRAPH CREAATION WITH " + str(_input) + " and " + str(output))
 
-    origin_node = kerns[0]['inst']
+    #if origin node hasn't been set, set it to the first kernel
+    if origin_node == '':
+        origin_node = kerns[0]['inst']
     kerns_temp = kerns
     kerns_rev_temp = kerns_rev
 
@@ -225,44 +270,6 @@ def createGraph(test=''):
             #plt.savefig(file_ext)
 
     print(graph_to_ascii(G))
-
-    #fpga_num = 4
-    for fpga_num in range(0, 12):
-    #if fpga_num == 4:
-        _G = networkx.DiGraph()
-
-
-        for kern in kerns:
-            print("kern['inst'] is " + kern['inst'])
-#            print("kern['kernel'] is " + kern['kernel'])
-            print("kerns_rev['inst'] is " + str(kerns_rev[kern['inst']]))
-#            print("kerns_rev['kernel'] is " + str(kerns_rev['kernel']))
-            print("kerns_to_node_map['inst'] is " + str(kerns_to_node_map[kerns_rev[kern['inst']]]))
-            if(kerns_to_node_map[kerns_rev[kern['inst']]] == fpga_num):
-                _G.add_node(kern['inst'] , kern=kern['kernel'])
-
-        for kern in kerns:
-            if kerns_to_node_map[kerns_rev[kern['inst']]] == fpga_num:
-                if(kern['inst'] == 'layer66'):
-                    print("LAYER66 outputs are "  + str(kern['outputs']))
-                print("FINAL GRAPH KERN " +  str(kern))
-                print("FINGAL GRAPH KERN OUTPUTS" + str(kern['outputs']))
-                print("FINAL GRAPH KERN NUM OUTPUTS " + str(len(kern['outputs'])))
-                for output in kern['outputs']:
-                    if 'output_inst' in output:
-                        if(kerns_to_node_map[kerns_rev[kern['inst']]] == fpga_num) and (kerns_to_node_map[kerns_rev[output['output_inst']]] == fpga_num):
-                            print("adding edge " + kern['inst'])
-                            _G.add_edge(kern['inst'], output['output_inst'], source_port=output['name'], sink_port=output['output_port'])
-
-
-        print("FPGA " + str(fpga_num) + " graph")
-        print("KERNS_TO_NODE_MAP")
-        print(kerns_to_node_map)
-        print("KERNS_REV")
-        print(kerns_rev)
-        print("GRAPH")
-        print(graph_to_ascii(_G))
-        print("Done graph")
 
 
 def createNode(nodes):
@@ -719,7 +726,7 @@ def _add_output_bridge(output_kernel, dest=None, source=None):
 def _add_input_bridge(input_kernel, dest=None):
     
     if(dest == None):
-        print ("ADD INPUT BRIDGE none dest")
+        print ("ADD INPUT BRIDGE none dest to kernel " + input_kernel)
     else:
         print ("ADD INPUT BRIDGE " + str(dest))
 
@@ -731,15 +738,25 @@ def _add_input_bridge(input_kernel, dest=None):
             
             
             
+
+    #ext_kernel is the kernel to add the bridge to, dereferenced by name
     ext_kernel = kerns[kerns_rev[input_kernel]]
+
+    print("ext_kernel is " + str(ext_kernel))
+    # ext_port is the input port to add a bridge to
+    # TODO , currently adding it to first port, use cases happen to be single input port on external interface of cut
+    # However will need to be updatec if the first kernel is a split kernel
+
     ext_port = ext_kernel['inputs'][0]
+    print("ext_port is " + str(ext_port))
     node_idx = kerns_to_node_map[kerns_rev[input_kernel]]
-    
+
     input_bridge_name = "input_" + str(ext_port['width']) + "hls4ml_galapagos_input_bridge_" + str(ext_port['width'])
     input_bridge_ip['kernel'] = input_bridge_name
     input_bridge_ip["inst"] = 'hls4ml_input_bridge_' + str(input_kernel)
     input_bridge_ip["outputs"].append({"name":"input", "width":ext_port['width'], "output_inst": input_kernel, "output_port": "input", "global": 0, 
-                "slave": {"node": kerns_rev[input_kernel], "port":"input"}, "bridge": 1
+                "slave": {"node": kerns_rev[input_kernel], "port":"input"}, "bridge": 1, "note": ["ml2g", input_kernel, "input_bridge"]
+
                 })
 
     kerns[kerns_rev[input_kernel]]['inputs'][0]['global'] = 0
@@ -758,7 +775,6 @@ def _add_input_bridge(input_kernel, dest=None):
             port = "M01_AXIS"
 
         
-        kerns[len(kerns) - 1]["outputs"][0]["slave"] = {"node":len(kerns), "port":"input_r"}
         if input_kernel not in input_bridges:
             input_bridge_ip["inputs"][0]['master'] = {"node":len(kerns) + 1, "port":port}
             input_bridges[input_kernel] = {"bridge":len(kerns) + 2, "port_switch":len(kerns) + 1, "decap":len(kerns)}
@@ -773,7 +789,8 @@ def _add_input_bridge(input_kernel, dest=None):
                     "aresetn": ["aresetn"],
                     "kernel" : "axis_switch",
                     "inst" : "port_switch_" + input_kernel,
-                    "properties": [["CONFIG.HAS_TLAST.VALUE_SRC USER"],["CONFIG.NUM_SI {1}", "CONFIG.NUM_MI {2}", "CONFIG.HAS_TLAST {1}", "CONFIG.DECODER_REG {1}"]]
+                    "properties": [["CONFIG.HAS_TLAST.VALUE_SRC USER"],["CONFIG.NUM_SI {1}", "CONFIG.NUM_MI {2}", "CONFIG.HAS_TLAST {1}", "CONFIG.DECODER_REG {1}"]],
+                    "note": ["ml2g", input_kernel, "port_switch"]
                 }
 
             if dest == 'input1':
@@ -790,9 +807,11 @@ def _add_input_bridge(input_kernel, dest=None):
                 "inst" : "decap_ip_" + input_kernel, 
                 "inputs": [{"name": "input_r", "global":1}],
                 #"outputs": [{"name":"output_r", "slave": {"node": len(kerns) + 1, "port":"S00_AXIS"}, "global":0, "output_inst": "port_switch_" + input_kernel, "output_port": "S00_AXIS"}]
-                "outputs": [{"name":"output_r", "global":0, "output_inst": "port_switch_" + input_kernel, "output_port": "S00_AXIS"}]
+                "outputs": [{"name":"output_r", "global":0, "output_inst": "port_switch_" + input_kernel, "output_port": "S00_AXIS"}],
+                "note": ["ml2g", input_kernel, "port_switch"]
             }
             kerns[kerns_rev[input_kernel]]['inputs'][0]['master'] = {"node":len(kerns) + 2, "port":"input"}
+            kerns[kerns_rev[input_kernel]]['note'] =  ["ml2g", input_kernel, "input"]
             kerns[len(kerns) - 1]["outputs"][0]["output_inst"] = decap_ip["inst"]
             kerns[len(kerns) - 1]["outputs"][0]["output_port"] = "input_r" 
             add_ip(decap_ip, node_idx)
@@ -807,12 +826,13 @@ def _add_input_bridge(input_kernel, dest=None):
             print("adding input_bridge, else2")
             add_ip(input_bridge_ip, node_idx)            
     else:
-        kerns[len(kerns) - 1]["outputs"][0]["output_inst"] = input_bridge_ip["inst"]
-        kerns[len(kerns) - 1]["outputs"][0]["output_port"] = "bridge_in" 
-        kerns[kerns_rev[input_kernel]]['inputs'][0]['master'] = {"node":len(kerns), "port":"input"}
-        kerns[len(kerns) - 1]["outputs"][0]["slave"] = {"node":len(kerns), "port":"input"}
+        input_bridge_index = len(kerns) - 1 
+        add_ip(input_bridge_ip, node_idx)
+        kerns[input_bridge_index]["outputs"][0]["slave"] = {"node":kerns_rev[input_kernel], "port":"input_r"}
+        kerns[input_bridge_index]["outputs"][0]["output_inst"] = input_kernel 
+        kerns[input_bridge_index]["outputs"][0]["output_port"] = "input_r" 
+        kerns[kerns_rev[input_kernel]]['inputs'][0]['master'] = {"node":input_bridge_index, "port":"input"}
         print("adding input_bridge, else1")
-        add_ip(input_bridge_ip, node_idx)            
 
 
 def hierRoutingNeeded(source_ports, sink_ports, edge):
@@ -856,16 +876,21 @@ def addWeights(index, layer_name):
 
 
 def addBridges():
-    
-    source_ports = networkx.get_edge_attributes(G,'source_port')
-    sink_ports = networkx.get_edge_attributes(G,'sink_port')
+    global origin_node
 
 
 
     print("FINAL GRAPH BEFORE BRIDGES")
     print(graph_to_ascii(G))
     
+    print("adding input_bridge to the to the origin_node: " + str(origin_node))
     _add_input_bridge(origin_node, None)
+    print("POOOO " + str(kerns[len(kerns) -1]))
+    origin_node = kerns[len(kerns) - 1]['inst']
+    print("NEW ORIGIN NODE IS " + origin_node )
+    createGraph()
+    source_ports = networkx.get_edge_attributes(G,'source_port')
+    sink_ports = networkx.get_edge_attributes(G,'sink_port')
     succ = networkx.dfs_successors(G, origin_node)[origin_node]
     #_add_output_bridge(edges[len(edges) - 1][1], dest=0)
 
@@ -895,6 +920,7 @@ def addBridges():
                     _add_input_bridge(edge[1], dest=kerns_rev[edge[0]])
                 else:
                     _add_output_bridge(edge[0], dest=None, source=source_port)
+                    print("adding input_bridge to the edge " + str(edge))
                     _add_input_bridge(edge[1], dest=None)
 
         last_edge = edge
@@ -958,7 +984,7 @@ def addBridgesAndWeights(netFile_name, logicalFile_name, mapFile_name):
 
     print("FINAL GRAPH ")
     createGraph() 
-
+    printFPGAGraphs()
 
 if __name__=='__main__':
 
