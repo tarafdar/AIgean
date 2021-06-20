@@ -1,11 +1,12 @@
 import getopt, sys
 import json
 import util
-import networkx 
+import networkx
 import math
 #from networkx.drawing.nx_agraph import write_dot
 from networkx.drawing.nx_pydot import write_dot
 import matplotlib.pyplot as plt
+import pprint
 #from asciinet import graph_to_ascii
 
 
@@ -23,13 +24,13 @@ kern_dict_map = {}
 ip_hier = []
 map_dict = []
 kern_dict = []
-input_bridges = {} 
+input_bridges = {}
 output_bridges = []
 global_kernels = []
 kern_num = 0
 
 node_num = 0
-debug = 1 
+debug = 0
 origin_node = ''
 G = networkx.DiGraph()
 G_verbose = networkx.DiGraph()
@@ -40,7 +41,7 @@ G_verbose = networkx.DiGraph()
 def logical_kernel_element(kern_name, kern_id, bridge=False, bram=False, fifo=False):
 
 
-    debug = 1 
+    global debug
     kern = kerns[kerns_rev[kern_name]]
     kerns[kerns_rev[kern_name]]["logical"] = True
     #kern_elem = {"clk":"ap_clk", "aresetn":"ap_rst_n", "vendor":"xilinx.com","lib":"hls", "num":kern_id, "rep":1}
@@ -93,7 +94,7 @@ def logical_kernel_element(kern_name, kern_id, bridge=False, bram=False, fifo=Fa
     #    kern_elem["kernel"] = kern["kernel"]
 
     if "m_axis" in kern:
-        kern_elem["m_axis"] = kern["m_axis"] 
+        kern_elem["m_axis"] = kern["m_axis"]
     else:
         kern_elem["m_axis"] = []
     for m_axis in kern['outputs']:
@@ -132,7 +133,7 @@ def logical_kernel_element(kern_name, kern_id, bridge=False, bram=False, fifo=Fa
 
     if ("wire_slave" in kern):
         kern_elem["wire_slave"] = kern["wire_slave"]
-    
+
     if("note" in kern):
         kern_elem["note"] = kern["note"]
 
@@ -162,7 +163,7 @@ def add_ip(ip, node):
 
 
 def printFPGAGraphs():
-    
+
     #fpga_num = 4
     for fpga_num in range(0, len(map_dict)):
     #if fpga_num == 4:
@@ -219,7 +220,7 @@ def createGraph(test=''):
     for kern in kerns:
         G.add_node(kern['inst'] , kern=kern['kernel'])
         G_verbose.add_node(kern['inst'] + ':' + str(kerns_rev[kern['inst']]) , kern=kern['kernel'])
-            
+
         #if(kern['inst'] == 'layer100' and not(test=='')):
         #print(kerns_to_node_map)
         #print("create graph adding inst " + kern['inst'])
@@ -267,12 +268,12 @@ def createGraph(test=''):
                 print(output)
                 G.add_edge(kern['inst'], kerns[output['slave']['node']]['inst'], source_port=output['name'], sink_port=output['slave']['port'])
                 G_verbose.add_edge(kern['inst'] + ':' + str(kerns_rev[kern['inst']]), kerns[output['slave']['node']]['inst'] + ':' + str(output['slave']['node']), source_port=output['name'], sink_port=output['slave']['port'])
-                
+
                 if kern['inst'] in kern_succ:
                     kern_succ[kern['inst']].append(kerns[output['slave']['node']]['inst'])
                 else:
                     kern_succ[kern['inst']] = [kerns[output['slave']['node']]['inst']]
-                
+
                 if kerns[output['slave']['node']]['inst'] in kern_predec:
                     kern_predec[kerns[output['slave']['node']]['inst']].append(kern['inst'])
                 else:
@@ -297,7 +298,7 @@ def createGraph(test=''):
     for edge in networkx.bfs_edges(G, origin_node):
         if not(edge[0] in  kerns_rev_temp):
             add_ip(kerns_temp[kerns_rev_temp[edge[0]]], kerns_to_node_map_temp[kerns_rev[edge[0]]])
-            
+
             #kerns_rev[edge[0]] = len(kerns)
             #kerns.append(kerns_temp[kerns_rev_temp[edge[0]]])
             #kern_elem = logical_kernel_element(edge[0],  len(kerns) - 1 )
@@ -305,7 +306,7 @@ def createGraph(test=''):
             #kern_dict.append(kern_elem)
         if not(edge[1] in  kerns_rev):
             add_ip(kerns_temp[kerns_rev_temp[edge[1]]], kerns_to_node_map_temp[kerns_rev[edge[1]]])
-            
+
             #kerns_rev[edge[1]] = len(kerns)
             #kerns.append(kerns_temp[kerns_rev_temp[edge[1]]])
             ##print("edge[1] is " + edge[1])
@@ -333,7 +334,7 @@ def createGraph(test=''):
 
 
 def createNode(nodes):
-    
+
     #node_to_kern_map = []
 
     for node_idx, node in enumerate(nodes):
@@ -370,7 +371,7 @@ def createNode(nodes):
 
 def get_common_successor(succ_array):
 
-    #print("in get common") 
+    #print("in get common")
     _succ_array = succ_array[1:]
     #print("first element in succ_array: ", succ_array[0])
     for i in succ_array[0]:
@@ -404,27 +405,27 @@ def merge1to1Graph():
                 G.add_edge(kern['inst'], output['output_inst'])
 
     #print("0:neighbors "  + str(G.neighbors(origin_node)))
-    
-    
-    
+
+
+
     _node = origin_node
 
-    #print("num nodes in graph", len(G.nodes)) 
+    #print("num nodes in graph", len(G.nodes))
     for node in G.nodes:
         edges = G.edges(node)
         #print("node " + str(node) +  " " + str(edges))
-        
-        # split node, figure out next merge node and make subgraph of all intermediate nodes 
+
+        # split node, figure out next merge node and make subgraph of all intermediate nodes
         #if(len(edges) > 1):
         if(G.out_degree(node) > 1) and (cluster_1to1 == True):
-            succ = {} 
+            succ = {}
 
             succ_array = []
             for neighbor in G.neighbors(node):
                 succ = networkx.dfs_successors(G, source=neighbor)
                 succ_array.append(succ)
             merge = get_common_successor(succ_array)
-            #print("merge ", merge) 
+            #print("merge ", merge)
             ip_core_list = [node]
 
             for succ_list in succ_array:
@@ -433,7 +434,7 @@ def merge1to1Graph():
                         ip_core_list.append(succ)
                     if (succ == merge):
                         break
-            
+
             #print ("ip core list " + str(ip_core_list))
             ip_num_list = []
             for ip in ip_core_list:
@@ -448,10 +449,10 @@ def merge1to1Graph():
         else:
             ip_hier.append([kerns_rev[node]])
             #print("ip_hier_else", ip_hier)
-    
+
 
 def get_bram_size(ipDir, ip):
-    fileName = ipDir + "/" + "resnet_" + ip['inst']  + "/solution1/syn/verilog/" + ip['inst'] + '_' + ip['kernel'] + '.v'
+    fileName = ipDir + "/" + "resnet_" + ip['inst']  + "/solution1/impl/verilog/" + ip['inst'] + '_' + ip['kernel'] + '.v'
     file = open(fileName, "r")
     bram_dict = {}
     found_addr = False
@@ -463,13 +464,13 @@ def get_bram_size(ipDir, ip):
                 addr_array = line_array[1].split(':')
                 bram_dict['addr'] = int(addr_array[0][1:])
                 found_addr = True
-            if(line_array[0] == "output" and line_array[2].endswith("_V_d1;")):
+            if(line_array[0] == "output" and line_array[2].endswith("_V_d0;")):
                 data_array = line_array[1].split(':')
                 bram_dict['data'] = int(data_array[0][1:])
                 found_data = True
         if(found_addr and found_data):
             break
-    
+
     weights_dict[ip['inst']] = bram_dict
 
 
@@ -483,7 +484,7 @@ def createIPList(ipDict):
     for ip in ipDict:
         kerns_rev[ip['inst']] = len(kerns)
         kerns_to_node_map[len(kerns)] = node_num
-        if "bram_size" in ip: 
+        if "bram_size" in ip:
             get_bram_size(ipDir, ip)
             #if(((ip["bram_size"]/64)%64) == 0):
             #    weights_dict[ip['inst']] = int(((ip["bram_size"]/64)/8)*8)
@@ -499,7 +500,7 @@ def createIPList(ipDict):
             ip['outputs'][_id]['global'] = 1
             ip['outputs'][_id]['local_node'] = 0
             ip['outputs'][_id]['local_port'] = 0
-        
+
         add_logical_ip(ip)
 
 
@@ -540,11 +541,11 @@ def create_map_file(map_file_name, map_input=[], bridge=False):
             if not(edge[0] in _kerns_rev):
                 _kerns_rev[edge[0]] = kerns_rev[edge[0]]
                 floating_kernels.append(kerns_rev[edge[0]])
-            
+
             if not(edge[1] in _kerns_rev):
                 _kerns_rev[edge[1]] = kerns_rev[edge[1]]
                 floating_kernels.append(kerns_rev[edge[1]])
-            
+
         #floating_kernels= list(kerns_rev.values())
         #floating_kernels.sort()
         #for i in ip_hier:
@@ -562,17 +563,17 @@ def create_map_file(map_file_name, map_input=[], bridge=False):
 
 
 def add_kernel_to_dict(kernel_name, kern_id, bram=False):
-    
+
     if 'bridge' in kerns[kerns_rev[kernel_name]]:
         if kerns[kerns_rev[kernel_name]]['bridge'] == 'input':
             for _input_idx, _input in enumerate(kerns[kerns_rev[kernel_name]]['inputs']):
-                kerns[kerns_rev[kernel_name]]['inputs'][_input_idx]['global'] = 1 
+                kerns[kerns_rev[kernel_name]]['inputs'][_input_idx]['global'] = 1
                 if 'slave' in  kerns[kerns_rev[kernel_name]]['inputs'][_input_idx]:
                     del kerns[kerns_rev[kernel_name]]['inputs'][_input_idx]['slave']
 
         elif kerns[kerns_rev[kernel_name]]['bridge'] == 'output':
             for _output_idx, _input in enumerate(kerns[kerns_rev[kernel_name]]['outputs']):
-                kerns[kerns_rev[kernel_name]]['outputs'][_output_idx]['global'] = 1 
+                kerns[kerns_rev[kernel_name]]['outputs'][_output_idx]['global'] = 1
                 if 'master' in  kerns[kerns_rev[kernel_name]]['outputs'][_output_idx]:
                     del kerns[kerns_rev[kernel_name]]['outputs'][_output_idx]['master']
 
@@ -595,7 +596,7 @@ def create_logical_file(logical_file_name, bridge=False):
     for edge in networkx.bfs_edges(G, origin_node):
         #print( "edge " + str(edge) + " data " + (str(G.get_edge_data(edge[0], edge[1]))))
         if not('logical' in  kerns[kerns_rev[edge[0]]]):
-            
+
             kern_id = add_kernel_to_dict(edge[0], kern_id)
             #kerns[kerns_rev[edge[0]]]['logical'] = True
             #kern_elem = logical_kernel_element(kerns[kerns_rev[edge[0]]]['inst'],  kern_id)
@@ -644,7 +645,7 @@ def create_hierarchy(file_name, logicalFile_name, mapFile_name, ipDir):
 
 
 def _add_output_bridge(output_kernel, dest, port_dest=None, source=None, slave_exists=True):
-    
+
     if source == "output" or source == "output_1":
         output_idx = 0
     else:
@@ -664,7 +665,7 @@ def _add_output_bridge(output_kernel, dest, port_dest=None, source=None, slave_e
 
     ext_kernel = kerns[kerns_rev[output_kernel]]
     ext_port = ext_kernel['outputs'][output_idx]
-    
+
     #ext_port = ext_kernel['outputs'][0]
     output_bridge_ip["kernel"] = "output_" + str(ext_port['width']) +  "hls4ml_galapagos_output_bridge_" + str(ext_port['width'])
     output_bridge_ip["inst"] = 'hls4ml_output_bridge_' + str(output_kernel) + '_' + source
@@ -672,18 +673,18 @@ def _add_output_bridge(output_kernel, dest, port_dest=None, source=None, slave_e
     #output_bridge_ip["inputs"] = [{"name":"output", "width":ext_port['width'], "global":0}]
     node_idx = kerns_to_node_map[kerns_rev[output_kernel]]
 
-    
+
     kerns[kerns_rev[output_kernel]]['outputs'][output_idx]['global'] = 0
     kerns[kerns_rev[output_kernel]]['outputs'][output_idx]['width'] = ext_port["width"]
-    kerns[kerns_rev[output_kernel]]['outputs'][output_idx]['slave'] =  {'node':(len(kerns) ), 'port':'output'} 
-    kerns[kerns_rev[output_kernel]]['outputs'][output_idx]['name'] = source 
+    kerns[kerns_rev[output_kernel]]['outputs'][output_idx]['slave'] =  {'node':(len(kerns) ), 'port':'output'}
+    kerns[kerns_rev[output_kernel]]['outputs'][output_idx]['name'] = source
 
     _kern_output = kerns[kerns_rev[output_kernel]]
     _kerns_kerns_rev_output_kernel =  kerns[kerns_rev[output_kernel]]['inst']
     if port_dest == None:
         output_bridge_ip["inputs"] = [{"name":"output", "width":ext_port['width'], "master":{"node": kerns_rev[output_kernel], "port":ext_port['name']}, "global":0}]
         output_bridge_ip["inputs"][0]['master'] = {"node":kerns_rev[output_kernel], "port":'output'}
-        kerns[kerns_rev[output_kernel]]['outputs'][output_idx]['output_inst'] = 'hls4ml_output_bridge_' + output_kernel + '_' + source 
+        kerns[kerns_rev[output_kernel]]['outputs'][output_idx]['output_inst'] = 'hls4ml_output_bridge_' + output_kernel + '_' + source
         kerns[kerns_rev[output_kernel]]['outputs'][output_idx]['output_port'] = "output"
     else:
         dest_encap_ip = {
@@ -710,26 +711,26 @@ def _add_output_bridge(output_kernel, dest, port_dest=None, source=None, slave_e
 
 
 def _add_input_bridge(input_kernel, dest=None, sink=None, first=False):
-    
+
 
     input_bridge_ip = {
             "inputs": [{"name":"bridge_in"}],
             "outputs": [],
             "bridge":"input"
         }
-    
+
     if not first:
         input_bridge_ip["global"] = 0
         input_bridge_ip["slave"] = {"node": len(kerns) -1, "port": "output"}
     else:
-        input_bridge_ip["global"] = 1 
+        input_bridge_ip["global"] = 1
 
-            
-            
+
+
 
     #ext_kernel is the kernel to add the bridge to, dereferenced by name
     ext_kernel = kerns[kerns_rev[input_kernel]]
-    
+
     if sink == "input" or sink == "input_1":
         input_idx = 0
     else:
@@ -744,7 +745,7 @@ def _add_input_bridge(input_kernel, dest=None, sink=None, first=False):
     input_bridge_name = "input_" + str(ext_port['width']) + "hls4ml_galapagos_input_bridge_" + str(ext_port['width'])
     input_bridge_ip['kernel'] = input_bridge_name
     input_bridge_ip["inst"] = 'hls4ml_input_bridge_' + str(input_kernel)
-    input_bridge_ip["outputs"].append({"name":"input", "width":ext_port['width'], "output_inst": input_kernel, "output_port": sink, "global": 0, 
+    input_bridge_ip["outputs"].append({"name":"input", "width":ext_port['width'], "output_inst": input_kernel, "output_port": sink, "global": 0,
                 "slave": {"node": kerns_rev[input_kernel], "port":"input"}, "bridge": 1, "note": ["ml2g", input_kernel, "input_bridge"]
 
                 })
@@ -757,13 +758,13 @@ def _add_input_bridge(input_kernel, dest=None, sink=None, first=False):
     if not(dest == None):
         #input bridge no longer connected to global switch
         input_bridge_ip["inputs"][0]["global"] = 0
-        
+
         if dest == 'input1':
             port = "M00_AXIS"
         else:
             port = "M01_AXIS"
 
-        
+
         if input_kernel not in input_bridges:
             input_bridge_ip["inputs"][0]['master'] = {"node":len(kerns) + 1, "port":port}
             input_bridges[input_kernel] = {"bridge":len(kerns) + 2, "port_switch":len(kerns) + 1, "decap":len(kerns)}
@@ -784,16 +785,16 @@ def _add_input_bridge(input_kernel, dest=None, sink=None, first=False):
 
             if dest == 'input1':
                 port_switch_ip["outputs"][0]["master"] = {"node":len(kerns) + 2, "port":"bridge_input"}
-                port_switch_ip["outputs"][0]["output_inst"] = input_bridge_ip["inst"] 
+                port_switch_ip["outputs"][0]["output_inst"] = input_bridge_ip["inst"]
                 port_switch_ip["outputs"][0]["output_port"] = "bridge_input"
             else:
                 port_switch_ip["outputs"][1]["master"] = {"node":len(kerns) + 2, "port":"bridge_input"}
-                port_switch_ip["outputs"][1]["output_inst"] = input_bridge_ip["inst"] 
+                port_switch_ip["outputs"][1]["output_inst"] = input_bridge_ip["inst"]
                 port_switch_ip["outputs"][1]["output_port"] = "bridge_input"
 
             decap_ip = {
                 "kernel" : "decap_ip",
-                "inst" : "decap_ip_" + input_kernel, 
+                "inst" : "decap_ip_" + input_kernel,
                 "inputs": [{"name": "input_r", "global":1}],
                 #"outputs": [{"name":"output_r", "slave": {"node": len(kerns) + 1, "port":"S00_AXIS"}, "global":0, "output_inst": "port_switch_" + input_kernel, "output_port": "S00_AXIS"}]
                 "outputs": [{"name":"output_r", "global":0, "output_inst": "port_switch_" + input_kernel, "output_port": "S00_AXIS"}],
@@ -802,22 +803,22 @@ def _add_input_bridge(input_kernel, dest=None, sink=None, first=False):
             kerns[kerns_rev[input_kernel]]['inputs'][0]['master'] = {"node":len(kerns) + 2, "port":"input"}
 #            kerns[kerns_rev[input_kernel]]['note'] =  ["ml2g", input_kernel, "input"]
             kerns[len(kerns) - 1]["outputs"][0]["output_inst"] = decap_ip["inst"]
-            kerns[len(kerns) - 1]["outputs"][0]["output_port"] = "input_r" 
+            kerns[len(kerns) - 1]["outputs"][0]["output_port"] = "input_r"
             add_ip(decap_ip, node_idx)
             add_ip(port_switch_ip, node_idx)
             add_ip(input_bridge_ip, node_idx)
         else:
             kerns[len(kerns) - 1]["outputs"][0]["output_inst"] = "decap_ip_" + input_kernel
-            kerns[len(kerns) - 1]["outputs"][0]["output_port"] = "input_r" 
+            kerns[len(kerns) - 1]["outputs"][0]["output_port"] = "input_r"
             input_bridge_ip["inputs"][0]['master'] = {"node":input_bridges[input_kernel], "port":port}
-            add_ip(input_bridge_ip, node_idx)            
+            add_ip(input_bridge_ip, node_idx)
     else:
-        input_bridge_index = len(kerns) 
+        input_bridge_index = len(kerns)
         add_ip(input_bridge_ip, node_idx)
         _updating_kern = kerns[input_bridge_index]['inst']
         kerns[input_bridge_index]["outputs"][0]["slave"] = {"node":kerns_rev[input_kernel], "port":sink}
-        kerns[input_bridge_index]["outputs"][0]["output_inst"] = input_kernel 
-        kerns[input_bridge_index]["outputs"][0]["output_port"] = sink 
+        kerns[input_bridge_index]["outputs"][0]["output_inst"] = input_kernel
+        kerns[input_bridge_index]["outputs"][0]["output_port"] = sink
         kerns[input_bridge_index]['outputs'][0]['width'] = ext_port["width"]
         #kerns[input_bridge_index]["const"] = {"name":"dest","val":len(kerns), "width":16}
         kerns[kerns_rev[input_kernel]]['inputs'][input_idx]['master'] = {"node":input_bridge_index, "port":"input"}
@@ -829,24 +830,26 @@ def hierRoutingNeeded(source_ports, sink_ports, edge):
 
 
 
-    num_external_predec = 0 
+    num_external_predec = 0
 
     if len(kern_predec[edge[1]]) > 1:
         for predec in kern_predec[edge[1]]:
             if not(kerns_to_node_map[kerns_rev[predec]] == kerns_to_node_map[kerns_rev[edge[1]]]):
                 num_external_predec = num_external_predec + 1
-            
+
     if num_external_predec > 1:
         return True
     else:
         return False
 
 
-    #TODO currently cases where hierarchical routing is actually needed not in resnet50 due to partitioning, not verified, might need to add logic for TCL in extra switch 
+    #TODO currently cases where hierarchical routing is actually needed not in resnet50 due to partitioning, not verified, might need to add logic for TCL in extra switch
 
 #TODO currently no coe file, weights are 0, need to add COE file in HLS4ML and then import into weight
 def addWeights(ipDir):
-    
+
+
+
     for kern_idx, kern in enumerate(kerns):
         if "bram_size" in kern:
             weight_port_name = 'w' + str(kern['inst'][5:])
@@ -861,11 +864,11 @@ def addWeights(ipDir):
                     "outputs": [],
                     "inputs": [],
                     "properties": ["CONFIG.Memory_Type {Dual_Port_ROM}",
-                                  "CONFIG.Enable_32bit_Address {false}", 
-                                  "CONFIG.Use_Byte_Write_Enable {false}", 
-                                  "CONFIG.Byte_Size {9}", 
+                                  "CONFIG.Enable_32bit_Address {false}",
+                                  "CONFIG.Use_Byte_Write_Enable {false}",
+                                  "CONFIG.Byte_Size {9}",
                                   "CONFIG.Write_Width_A {" + str(bram_dict["data"]+1) + "}",
-                                  "CONFIG.Write_Depth_A {" + str(int(pow(2,bram_dict["addr"]+1))) + "}", 
+                                  "CONFIG.Write_Depth_A {" + str(int(pow(2,bram_dict["addr"]+1))) + "}",
                                   "CONFIG.Read_Width_A {" + str(bram_dict["data"] + 1) +"}",
                                   "CONFIG.Operating_Mode_A {NO_CHANGE}",
                                   "CONFIG.Write_Width_B {" + str(bram_dict["data"] + 1) + "}",
@@ -876,45 +879,45 @@ def addWeights(ipDir):
                                   "CONFIG.Register_PortB_Output_of_Memory_Primitives {true}"],
                     "wire_master": [
                                     {'name':'douta',
-                                    'scope': 'local', 
+                                    'scope': 'local',
                                     'slave':
                                         {'kernel_inst':
-                                        {'inst': kern['inst'], 'kernel': kern['kernel'], 'node':kern_idx}, 
+                                        {'inst': kern['inst'], 'kernel': kern['kernel'], 'node':kern_idx},
                                         'port': weight_port_name  + '_V_q0', 'node': kern_idx}},
                                     {'name':'doutb',
-                                    'scope': 'local', 
+                                    'scope': 'local',
                                     'slave':
                                         {'kernel_inst':
-                                        {'inst': kern['inst'], 'kernel': kern['kernel'], 'node':kern_idx}, 
+                                        {'inst': kern['inst'], 'kernel': kern['kernel'], 'node':kern_idx},
                                         'port': weight_port_name  + '_V_q1', 'node': kern_idx}}
                                         ],
                     "wire_slave": [
                                     {'name':'addra',
-                                    'scope': 'local', 
+                                    'scope': 'local',
                                     'master':
                                         {'kernel_inst':
-                                        {'inst': kern['inst'], 'kernel': kern['kernel'], 'node':kern_idx}, 
+                                        {'inst': kern['inst'], 'kernel': kern['kernel'], 'node':kern_idx},
                                         'port': weight_port_name  + '_V_address0', 'node': kern_idx}},
                                     {'name':'addrb',
-                                    'scope': 'local', 
+                                    'scope': 'local',
                                     'master':
                                         {'kernel_inst':
-                                        {'inst': kern['inst'], 'kernel': kern['kernel'], 'node':kern_idx}, 
+                                        {'inst': kern['inst'], 'kernel': kern['kernel'], 'node':kern_idx},
                                         'port': weight_port_name  + '_V_address1', 'node': kern_idx}}
                                         ]
             }
             kerns[kern_idx]["wire_slave"] = [
                                             {'name': weight_port_name +  '_V_q0',
-                                               'scope': 'local', 
-                                               'master': 
+                                               'scope': 'local',
+                                               'master':
                                                 {'kernel_inst':
                                                     {'inst': "weight_mem_" + layer_name, 'kernel': "blk_mem_gen", 'node':len(kerns)},
                                                 'port': 'douta',
                                                 'node': len(kerns)
                                                 }},
                                             {'name': weight_port_name +  '_V_q1',
-                                               'scope': 'local', 
-                                               'master': 
+                                               'scope': 'local',
+                                               'master':
                                                 {'kernel_inst':
                                                     {'inst': "weight_mem_" + layer_name, 'kernel': "blk_mem_gen", 'node':len(kerns)},
                                                 'port': 'doutb',
@@ -923,22 +926,22 @@ def addWeights(ipDir):
                                                 ]
             kerns[kern_idx]["wire_master"] = [
                                                {'name': weight_port_name +  '_V_address0',
-                                               'scope': 'local', 
-                                               'master': 
+                                               'scope': 'local',
+                                               'master':
                                                 {'kernel_inst':
                                                     {'inst': "weight_mem_" + layer_name, 'kernel': "blk_mem_gen", 'node':len(kerns)},
                                                 'port': 'addra',
                                                 'node': len(kerns)
                                                 }},
                                                {'name': weight_port_name +  '_V_address1',
-                                               'scope': 'local', 
-                                               'master': 
+                                               'scope': 'local',
+                                               'master':
                                                 {'kernel_inst':
                                                     {'inst': "weight_mem_" + layer_name, 'kernel': "blk_mem_gen", 'node':len(kerns)},
                                                 'port': 'addrb',
                                                 'node': len(kerns)
                                                 }}
-                                                
+
                                                 ]
             add_ip(weight_mem, kerns_to_node_map[kerns_rev[kern['inst']]])
 
@@ -950,10 +953,10 @@ def addBridges():
 
 
     #print(graph_to_ascii(G))
-    
+
     _add_input_bridge(origin_node, dest=None, sink='input')
     origin_node = kerns[len(kerns) - 1]['inst']
-    
+
     #remake graph with new input bridge
     createGraph(test='before_bridge')
 
@@ -973,12 +976,12 @@ def addBridges():
         sinkEdgeNode = kerns_to_node_map[kerns_rev[edge[1]]]
 
         if not(sourceEdgeNode == sinkEdgeNode):
-            output_bridge_id = -1 
+            output_bridge_id = -1
             input_port_name = ''
             for output_id, _output in enumerate(kerns[kerns_rev[edge[0]]]['outputs']):
-                
+
                 #destination is a single port
-                
+
                 if _output['name'] == source_port:
                     #RESNET 50 use case shouldn't trigger this
                     if hierRoutingNeeded(source_ports, sink_ports, edge):
@@ -989,12 +992,12 @@ def addBridges():
                         _add_input_bridge(edge[1], dest=None, sink=sink_port)
 
         last_edge = edge
-    
+
     iterEdges = []
     for edge in networkx.bfs_edges(G, last_edge[1]):
         iterEdges.append(edge)
         last_edge = edge
-    
+
 
     for edge in G.edges():
         if not (edge in edges_visited):
@@ -1006,10 +1009,10 @@ def addBridges():
             print("CHECKING EDGE " +  str(edge))
 
             if not(sourceEdgeNode == sinkEdgeNode):
-                output_bridge_id = -1 
+                output_bridge_id = -1
                 input_port_name = ''
                 for output_id, _output in enumerate(kerns[kerns_rev[edge[0]]]['outputs']):
-                    
+
                     #destination is a single port
                     if _output['name'] == source_port:
                         #RESNET 50 use case shouldn't trigger this
@@ -1049,7 +1052,8 @@ def addBuffers(logical_file_name, map_file_name):
 
 
     valid_fifo_depths = [16, 32, 64, 128, 512, 1024, 2048, 4096, 8192, 16384, 32768]
-    
+    pp = pprint.PrettyPrinter(indent=4)
+
     for kern_idx, kern in enumerate(kern_dict):
         if "note" in kern:
             if "egress_fifo_depth" in kern['note']:
@@ -1070,8 +1074,21 @@ def addBuffers(logical_file_name, map_file_name):
                     kern_dict[kern_idx]["m_axis"][output_idx]["slave"]["node"] = len(kerns)
                     kern_dict[kern_idx]["m_axis"][output_idx]["slave"]["port"] = "S_AXIS"
                     print(kern_dict[kern_dict_map[fifo_ip["s_axis"]["master"]["node"]]])
+                    print(kern_dict[kern_dict_map[fifo_ip["s_axis"]["master"]["node"]]]["s_axis"])
+                    print("between kern ")
+                    pp.pprint(kern)
+                    print("and kern ")
+
+                    pp.pprint(kern_dict[kern_dict_map[fifo_ip["s_axis"]["master"]["node"]]])
+
+                    print("kern dict")
+                    pp.pprint(kern_dict)
+                    print(len(kern_dict[kern_dict_map[fifo_ip["s_axis"]["master"]["node"]]]["s_axis"]))
+                    print(output_idx)
+                    print(len(kern["m_axis"]))
+                    print(kern_dict[kern_dict_map[fifo_ip["s_axis"]["master"]["node"]]]["s_axis"][output_idx])
                     kern_dict[kern_dict_map[fifo_ip["s_axis"]["master"]["node"]]]["s_axis"][output_idx]["master"]["node"] = len(kerns)
-                    kern_dict[kern_dict_map[fifo_ip["s_axis"]["master"]["node"]]]["s_axis"][output_idx]["master"]["port"] = "M_AXIS" 
+                    kern_dict[kern_dict_map[fifo_ip["s_axis"]["master"]["node"]]]["s_axis"][output_idx]["master"]["port"] = "M_AXIS"
                     node_idx = kerns_to_node_map[kerns_rev[kern["note"]["inst"]]]
                     add_ip(fifo_ip, node_idx)
                     fifo_logical_element = logical_kernel_element(fifo_ip["inst"], 0, bridge=False, bram=True, fifo=True)
@@ -1096,7 +1113,7 @@ def addBuffers(logical_file_name, map_file_name):
 #    for kern_idx, kern in enumerate(kerns):
 #        if "egress_fifo_depth" in kern:
 #            for output_idx, output in enumerate(kern['outputs']):
-#                kerns[kern_idx]['outputs'][output_idx]['output_inst'] = fifo_ip['inst'] 
+#                kerns[kern_idx]['outputs'][output_idx]['output_inst'] = fifo_ip['inst']
 #                kerns[kern_idx]['outputs'][output_idx]['output_port'] = "S_AXIS"
 #                add_ip(fifo_ip, kerns_to_node_map[kern['inst']])
 #            print("EGRESS " + kern['inst'] + " fifo depth is "  + str(kern["egress_fifo_depth"]))
@@ -1112,16 +1129,18 @@ def addBridgesAndWeights(netFile_name, logicalFile_name, mapFile_name, ipDir):
 
     createIPList(net['ips'])
     createNode(mapFile['cluster']['node'])
-    createGraph()    
-    addBridges()
-    addWeights(ipDir)
+    map_input = util.getDict(mapFile_name)['cluster']['node']
     output_map = mapFile_name.split('.json')[0] + '_output.json'
     output_logical = logicalFile_name.split('.json')[0] + '_output.json'
-    map_input = util.getDict(mapFile_name)['cluster']['node']
+
+    createGraph()
+    addBuffers(output_logical, output_map)
+    addBridges()
+    addWeights(ipDir)
     create_map_file(output_map,map_input, True)
     create_logical_file(output_logical, True)
-    addBuffers(output_logical, output_map)
-    createGraph() 
+    #addBuffers(output_logical, output_map)
+    createGraph()
     printFPGAGraphs()
 #    print(graph_to_ascii(G))
 
